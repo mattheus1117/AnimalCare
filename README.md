@@ -1,3 +1,6 @@
+Caso queira clonar o repositório, não esqueça de instalar o "node_modules":
+        npm install node_modules
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
