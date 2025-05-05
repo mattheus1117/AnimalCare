@@ -1,5 +1,5 @@
 Caso queira clonar o repositório, não esqueça de instalar o "node_modules":
-        npm install node_modules
+        npm install
 
 # React + TypeScript + Vite
 
