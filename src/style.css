@@ -61,6 +61,14 @@ body {
     border: 2px solid black;
 }
 
+.chat-btn {
+    background: none;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    color: inherit;
+}
+
 /* ============= */
 
 .footer {
@@ -105,9 +113,12 @@ body {
 /* Container para os cards */
 .card-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-columns: repeat(3, 0.2fr);
   gap: 5rem;
   padding: 5rem;
+  justify-content: center;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 
@@ -145,7 +156,7 @@ body {
 
 /* Reutiliza botão Quero Adotar */
 .QadotarCard {
-    margin-top: 1rem;W
+    margin-top: 1rem;
     color: white;
     background-color: rgb(219, 168, 0);
     border-radius: 1vh;
