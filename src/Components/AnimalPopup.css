@@ -1,0 +1,67 @@
+.animal-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.animal-popup {
+  display: flex;
+  background-color: #e0e0e0;
+  border-radius: 1rem;
+  max-width: 800px;
+  width: 90%;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+}
+
+.animal-popup-left img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  max-width: 350px;
+}
+
+.animal-popup-right {
+  padding: 2rem;
+  flex: 1;
+  position: relative;
+}
+
+.close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem 2rem;
+  margin: 1.5rem 0;
+}
+
+.btn-container {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.btn-adotar {
+  background-color: rgb(219, 168, 0);
+  color: white;
+  border: none;
+  padding: 0.7rem 2rem;
+  border-radius: 2rem;
+  font-size: 1rem;
+  cursor: pointer;
+}

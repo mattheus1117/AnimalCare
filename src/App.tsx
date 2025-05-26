@@ -1,38 +1,30 @@
+import { useState } from 'react';
+import { AnimaisParaAdotar } from './AnimaisParaAdotar';
 import './App.css'
+import "./style.css"
+
 import Footer from './Components/Footer'
 import Navbar from './Components/Header'
 import Card from './Components/Card';
-import "./style.css"
-import { useState } from 'react';
 import Chat from './Components/Chat';
+import AnimalPopup from './Components/AnimalPopup';
 
 function App() {
 
   const [chatVisivel, setChatVisivel] = useState(false);
-
-  const animais = [
-    { imagem: 'AnimalCare/public/Images/Gato.jpg', nome: 'Mimi', estado: 'SP', cidade: 'São Paulo' },
-    { imagem: 'https://placekitten.com/301/200', nome: 'Rex', estado: 'RJ', cidade: 'Rio de Janeiro' },
-    { imagem: 'https://placekitten.com/302/200', nome: 'Luna', estado: 'MG', cidade: 'Belo Horizonte' },
-    { imagem: 'https://placekitten.com/303/200', nome: 'Bob', estado: 'PR', cidade: 'Curitiba' },
-    { imagem: 'https://placekitten.com/304/200', nome: 'Toby', estado: 'RS', cidade: 'Porto Alegre' },
-    { imagem: 'https://placekitten.com/300/200', nome: 'Mimi', estado: 'SP', cidade: 'São Paulo' },
-    { imagem: 'https://placekitten.com/301/200', nome: 'Rex', estado: 'RJ', cidade: 'Rio de Janeiro' },
-    { imagem: 'https://placekitten.com/302/200', nome: 'Luna', estado: 'MG', cidade: 'Belo Horizonte' },
-    { imagem: 'https://placekitten.com/303/200', nome: 'Bob', estado: 'PR', cidade: 'Curitiba' },
-    { imagem: 'https://placekitten.com/304/200', nome: 'Toby', estado: 'RS', cidade: 'Porto Alegre' },
-  ];
+  const [animalSelecionado, setAnimalSelecionado] = useState(null);
 
   return (
     <>
       <Navbar onChatClick={() => setChatVisivel((v) => !v)} />
       <div className="card-container">
-        {animais.map((animal, index) => (
-          <Card key={index} {...animal} />
+        {AnimaisParaAdotar.map((animal, index) => (
+          <Card key={index} {...animal} onClick={() => setAnimalSelecionado(animal)} />
         ))}
       </div>
       <Footer />
       {chatVisivel && <Chat onClose={() => setChatVisivel(false)} />}
+      {animalSelecionado && (<AnimalPopup animal={animalSelecionado} onClose={() => setAnimalSelecionado(null)}/>)}
     </>
   );
 }
