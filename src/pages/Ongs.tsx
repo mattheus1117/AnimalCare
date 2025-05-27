@@ -1,12 +1,10 @@
 import React from "react";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import Header from "../components/Header.tsx";
+import Footer from "../components/Footer.tsx";
 import Chat from "../components/Chat/Chat.tsx";
-import AnimalPopup from "../components/AnimalPopup/AnimalPopup.tsx";
 
 export const Ongs = () => {
     const [chatVisivel, setChatVisivel] = React.useState(false);
-    const [animalSelecionado, setAnimalSelecionado] = React.useState(null);
 
     return <>
         <Header onChatClick={() => setChatVisivel((v) => !v)} />
@@ -18,6 +16,5 @@ export const Ongs = () => {
             <br/>
         <Footer />
         {chatVisivel && <Chat onClose={() => setChatVisivel(false)} />}
-        {animalSelecionado && (<AnimalPopup animal={animalSelecionado} onClose={() => setAnimalSelecionado(null)}/>)}
     </>
 }
