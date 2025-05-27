@@ -9,11 +9,11 @@ export const AppRoutes = () => {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path='/' element={<Home/>}/>
-                <Route path='/doacao' element={<Doacao/>} />
-                <Route path='/ongs' element={<Ongs/>} />
-                <Route path='/adotar' element={<Adotar/>} />
-                <Route path='/login' element={<Login/>} />
+                <Route path='/AnimalCare/' element={<Home/>}/>
+                <Route path='/AnimalCare/doacao' element={<Doacao/>} />
+                <Route path='/AnimalCare/ongs' element={<Ongs/>} />
+                <Route path='/AnimalCare/adotar' element={<Adotar/>} />
+                <Route path='/AnimalCare/login' element={<Login/>} />
 
                 <Route path='*' element={<Navigate to ='/' />}/>     
             </Routes>
