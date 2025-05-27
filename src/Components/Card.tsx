@@ -1,4 +1,12 @@
-export default function Card({ imagem, nome, estado, cidade, onClick }) {
+interface CardProps {
+    imagem: string;
+    nome: string;
+    estado: string;
+    cidade: string;
+    onClick: () => void;
+}
+
+export default function Card({ imagem, nome, estado, cidade, onClick }: CardProps) {
     return (
         <div className="card">
             <img src={imagem} alt={nome} className="card-img" />

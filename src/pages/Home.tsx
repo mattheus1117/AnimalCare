@@ -8,9 +8,23 @@ import Card from '../components/Card';
 import Chat from '../components/Chat/Chat';
 import AnimalPopup from '../components/AnimalPopup/AnimalPopup';
 
+interface Animal {
+    imagem: string;
+    nome: string;
+    estado: string;
+    cidade: string;
+    peso: string;
+    sexo: string;
+    idade: string;
+    especie: string;
+    raca: string;
+    porte: string;
+    descricao: string;
+}
+
 export const Home = () => {
     const [chatVisivel, setChatVisivel] = React.useState(false);
-    const [animalSelecionado, setAnimalSelecionado] = React.useState(null);
+    const [animalSelecionado, setAnimalSelecionado] = React.useState<Animal | null>(null);
 
     return <>
        <Header onChatClick={() => setChatVisivel((v) => !v)} />
