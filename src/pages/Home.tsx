@@ -2,10 +2,10 @@ import React from 'react';
 import { AnimaisParaAdotar } from '.././AnimaisParaAdotar';
 import ".././style.css"
 
-import Header from ".././components/Header.tsx";
-import Footer from ".././components/Footer.tsx";
-import Card from '.././components/Card.tsx';
-import Chat from '../components/Chat/Chat';
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import Chat from "../components/Chat/Chat";
+import Card from '../components/Card';
 import AnimalPopup from '../components/AnimalPopup/AnimalPopup';
 
 interface Animal {
