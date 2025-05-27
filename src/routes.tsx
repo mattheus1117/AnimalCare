@@ -7,15 +7,15 @@ import { Login } from './pages/Login';
 
 export const AppRoutes = () => {
     return (
-        <BrowserRouter>
+        <BrowserRouter basename="/AnimalCare"> 
             <Routes>
-                <Route path='/AnimalCare/' element={<Home/>}/>
-                <Route path='/AnimalCare/doacao' element={<Doacao/>} />
-                <Route path='/AnimalCare/ongs' element={<Ongs/>} />
-                <Route path='/AnimalCare/adotar' element={<Adotar/>} />
-                <Route path='/AnimalCare/login' element={<Login/>} />
+                <Route path='/' element={<Home/>}/>
+                <Route path='/doacao' element={<Doacao/>} />
+                <Route path='/ongs' element={<Ongs/>} />
+                <Route path='/adotar' element={<Adotar/>} />
+                <Route path='/login' element={<Login/>} />
 
-                <Route path='*' element={<Navigate to ='/AnimalCare/' />}/>     
+                <Route path='*' element={<Navigate to ='/' />}/>     
             </Routes>
         </BrowserRouter>
     );
