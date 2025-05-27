@@ -13,6 +13,6 @@ export default function Footer() {
                 <a href="https://instagram.com" target="_blank" rel="noreferrer">Instagram</a>
                 <a href="mailto:contato@animalcare.com">E-mail</a>
             </div>
-        </footer>
+        </footer>        
     );
 }

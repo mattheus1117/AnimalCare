@@ -1,17 +1,29 @@
+import { Link } from 'react-router-dom'
+
 export default function Navbar({ onChatClick }: { onChatClick: () => void }) {
     return (
         <nav className="nav">
             <div className="nav-left">
-                <a href="/" className="nome-site">Animal Care</a>
+                <Link to='/' className="nome-site">
+                    Animal Care
+                </Link>
             </div>
             <div className="nav-center">
-                <a href="/Doacao">Doação</a>
-                <a href="/ONGeProtetores">ONGs/Protetores</a>
+                <Link to='/doacao'>
+                    Doação
+                </Link>
+                <Link to='/ongs'>
+                    ONGs/Protetores
+                </Link>
                 <button onClick={onChatClick} className="chat-btn">Chat</button>
             </div>
             <div className="nav-right">
-                <a href="/Adotar" className="Qadotar">Quero Adotar</a>
-                <a href="/Entrar" className="Entrar">Entrar</a>
+                <Link to='/adotar' className="Qadotar">
+                    Quero Adotar
+                </Link>
+                <Link to='/login' className="Entrar">
+                    Entrar
+                </Link>
             </div>
         </nav>
     );
