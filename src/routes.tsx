@@ -15,7 +15,7 @@ export const AppRoutes = () => {
                 <Route path='/AnimalCare/adotar' element={<Adotar/>} />
                 <Route path='/AnimalCare/login' element={<Login/>} />
 
-                <Route path='*' element={<Navigate to ='/' />}/>     
+                <Route path='*' element={<Navigate to ='/AnimalCare/' />}/>     
             </Routes>
         </BrowserRouter>
     );
