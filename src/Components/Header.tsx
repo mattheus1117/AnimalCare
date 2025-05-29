@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 
 export default function Navbar({ onChatClick }: { onChatClick: () => void }) {
     return (
-        <nav className="nav">
+        <nav className="nav h-24">
             <div className="nav-left">
                 <Link to='/' className="nome-site">
                     Animal Care
