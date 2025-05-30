@@ -3,10 +3,16 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Chat from "../components/Chat/Chat";
 import { Link } from "react-router-dom";
+import { api } from '../services/api'
 
 export const Login = () => {
-    const [chatVisivel, setChatVisivel] = React.useState(false);
 
+    async function userLogin() {
+        const response = await api.get("/customers");
+        console.log(response);
+    }
+
+    const [chatVisivel, setChatVisivel] = React.useState(false);
     const [showCreateAccount, setShowCreateAccount] = React.useState(false);
 
     const handleShowCreateAccount = () => {
@@ -53,6 +59,7 @@ export const Login = () => {
                             <button
                                 type="submit"
                                 className="w-full bg-indigo-500 text-white py-2 rounded-lg hover:bg-indigo-600 transition-colors mb-4 cursor-pointer"
+                                onClick={userLogin}
                             >
                                 Login
                             </button>
