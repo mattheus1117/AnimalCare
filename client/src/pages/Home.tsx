@@ -17,6 +17,7 @@ interface Animal {
     size: number;
     kind: string;
     race: string;
+    status: string;
     weight?: number;
     location?: string;
     description?: string;
