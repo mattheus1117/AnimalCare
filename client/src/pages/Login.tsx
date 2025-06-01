@@ -7,11 +7,6 @@ import { api } from '../services/api'
 
 export const Login = () => {
 
-    async function userLogin() {
-        const response = await api.get("/customers");
-        console.log(response);
-    }
-
     const [chatVisivel, setChatVisivel] = React.useState(false);
     const [showCreateAccount, setShowCreateAccount] = React.useState(false);
 
@@ -22,7 +17,33 @@ export const Login = () => {
     const handleBackToLogin = () => {
         setShowCreateAccount(false);
     };
+
+    const [loading, setLoading] = React.useState(false);
+
+    const [email, setEmail] = React.useState('');
+    const [password, setSenha] = React.useState('');
     
+    async function userLogin(event: React.FormEvent) {
+        event.preventDefault(); // impede recarregar a página
+        setLoading(true);
+
+        console.log('Email:', email);
+        console.log('Senha:', password);
+
+        try {
+            const response = await api.post("/loginCustomer", {
+                email,
+                password
+            });
+            console.log(response.data);
+
+        } catch (error) {
+            console.error('Erro ao logar:', error);
+        } finally {
+            setLoading(false);
+        }
+    }
+
     return <>
         <Header onChatClick={() => setChatVisivel((v) => !v)} />
         
@@ -34,12 +55,14 @@ export const Login = () => {
                 {!showCreateAccount ? (
                     <>
                         <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">Entrar</h2>
-                        <form>
+                        <form onSubmit={userLogin}>
                             <div className="mb-4">
                                 <label className="block text-gray-700 mb-2" htmlFor="email">E-mail ou CPF</label>
                                 <input
                                     type="text"
                                     id="email"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
                                     placeholder="seuemail@exemplo.com"
                                     className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
                                 />
@@ -49,6 +72,8 @@ export const Login = () => {
                                 <input
                                     type="password"
                                     id="senha"
+                                    value={password}
+                                    onChange={(e) => setSenha(e.target.value)}
                                     placeholder="********"
                                     className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
                                 />
@@ -58,10 +83,37 @@ export const Login = () => {
                             </div>
                             <button
                                 type="submit"
-                                className="w-full bg-indigo-500 text-white py-2 rounded-lg hover:bg-indigo-600 transition-colors mb-4 cursor-pointer"
-                                onClick={userLogin}
-                            >
-                                Login
+                                className={`w-full flex items-center justify-center bg-indigo-500 text-white py-2 rounded-lg transition-colors mb-4 cursor-pointer ${
+                                    loading ? 'opacity-50 cursor-not-allowed' : 'hover:bg-indigo-600'
+                                }`}
+                                disabled={loading}
+                                >
+                                {loading ? (
+                                    <>
+                                        <svg
+                                            className="animate-spin h-5 w-5 mr-2 text-white"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <circle
+                                                className="opacity-25"
+                                                cx="12"
+                                                cy="12"
+                                                r="10"
+                                                stroke="currentColor"
+                                                strokeWidth="4"
+                                            ></circle>
+                                            <path
+                                                className="opacity-75"
+                                                fill="currentColor"
+                                                d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                                            ></path>
+                                        </svg>
+                                    </>
+                                ) : (
+                                    'Login'
+                                )}
                             </button>
                             <div className="flex justify-center">
                                 <button

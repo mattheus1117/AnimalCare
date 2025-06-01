@@ -9,13 +9,23 @@ class CustomerController {
 
         reply.send(customers);
     }
+    
+    async handleLoginCustomer(request: FastifyRequest, reply: FastifyReply){
+
+        const { email, password } = request.body as { email: string, password: string };
+
+        const customerService = new CustomerService();
+        const customer = await customerService.loginCustomer({email, password});
+
+        reply.send(customer);
+    }
 
     async handleCreateCustomer(request: FastifyRequest, reply: FastifyReply){
 
-        const { name, email } = request.body as { name: string, email: string };
+        const { name, email, password } = request.body as { name: string, email: string, password: string };
 
         const customerService = new CustomerService();
-        const customer = await customerService.createCustomer({ name, email });
+        const customer = await customerService.createCustomer({ name, email, password });
 
         reply.send(customer);
     }

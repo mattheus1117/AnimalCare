@@ -14,6 +14,10 @@ export async function routes(fastify: FastifyInstance, options: FastifyPluginOpt
         return new CustomerController().handleCreateCustomer(request, reply);
     });
 
+    fastify.post("/loginCustomer", async (request: FastifyRequest, reply: FastifyReply) => {
+        return new CustomerController().handleLoginCustomer(request, reply);
+    });
+
     fastify.delete("/customer", async (request: FastifyRequest, reply: FastifyReply) => {
         return new CustomerController().handleDeleteCustomer(request, reply);
     });
