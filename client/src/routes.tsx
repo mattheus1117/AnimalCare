@@ -4,6 +4,7 @@ import { Doacao } from './pages/Doacao';
 import { Ongs } from './pages/Ongs';
 import { Adotar } from './pages/Adotar';
 import { Login } from './pages/Login';
+import { CreateAccount } from './pages/CreateAccount';
 
 export const AppRoutes = () => {
     return (
@@ -14,6 +15,7 @@ export const AppRoutes = () => {
                 <Route path='/ongs' element={<Ongs/>} />
                 <Route path='/adotar' element={<Adotar/>} />
                 <Route path='/login' element={<Login/>} />
+                <Route path='/create-account' element={<CreateAccount/>} />
 
                 <Route path='*' element={<Navigate to ='/' />}/>     
             </Routes>

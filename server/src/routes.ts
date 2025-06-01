@@ -2,6 +2,7 @@ import { FastifyInstance, FastifyPluginOptions, FastifyRequest, FastifyReply } f
 
 import { CustomerController } from "./controllers/CustomerController";
 import { AnimalController } from "./controllers/AnimalController";
+import { OngController } from "./controllers/OngController";
 
 export async function routes(fastify: FastifyInstance, options: FastifyPluginOptions) {
 
@@ -20,6 +21,19 @@ export async function routes(fastify: FastifyInstance, options: FastifyPluginOpt
 
     fastify.delete("/customer", async (request: FastifyRequest, reply: FastifyReply) => {
         return new CustomerController().handleDeleteCustomer(request, reply);
+    });
+
+    //ONGs
+    fastify.get("/ongs", async (request: FastifyRequest, reply: FastifyReply) => {
+        return new OngController().handleListOngs(request, reply);
+    });
+
+    fastify.post("/ong", async (request: FastifyRequest, reply: FastifyReply) => {
+        return new OngController().handleCreateOng(request, reply);
+    });
+
+    fastify.delete("/ong", async (request: FastifyRequest, reply: FastifyReply) => {
+        return new OngController().handleDeleteOng(request, reply);
     });
 
     //Animals
