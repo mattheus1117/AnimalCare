@@ -1,6 +1,20 @@
 import { FastifyRequest, FastifyReply } from 'fastify';
 import { CustomerService } from '../services/CustomerService'
 
+interface CreateCustomerProps {
+    name: string;
+    cpf: string;
+    dateOfBirth: string;
+    telephone: string;
+    email: string;
+    password: string;
+    state: string;
+    zipcode: string;
+    city: string;
+    neighborhood: string;
+    patio: string;
+}
+
 class CustomerController {
     async handleListCustomers(request: FastifyRequest, reply: FastifyReply){
 
@@ -22,10 +36,53 @@ class CustomerController {
 
     async handleCreateCustomer(request: FastifyRequest, reply: FastifyReply){
 
-        const { name, email, password } = request.body as { name: string, email: string, password: string };
+        const { 
+        name,
+        cpf,
+        dateOfBirth,
+        telephone,
+        email,
+        password,
+        state,
+        zipcode,
+        city,
+        neighborhood,
+        patio } = request.body as CreateCustomerProps;
+
+        // validações da senha
+        // letra minúscula
+        if (!/[a-z]/.test(password)) {
+            throw new Error("A senha deve ter pelo menos 1 letra minúscula.")
+        }
+
+        // letra maiúscula
+        if(!/[A-Z]/.test(password)){
+            throw new Error("A senha deve ter pelo menos 1 letra maiúscula.")
+        }
+
+        // número
+        if(!/[0-9]/.test(password)){
+            throw new Error("A senha deve ter pelo menos 1 número.")
+        }
+
+        // caractere especial
+        if(!/[^a-zA-Z0-9\s]/.test(password)){
+            throw new Error("A senha deve ter pelo menos 1 caractere especial.")
+        }
 
         const customerService = new CustomerService();
-        const customer = await customerService.createCustomer({ name, email, password });
+        const customer = await customerService.createCustomer({ 
+            name,
+            cpf,
+            dateOfBirth,
+            telephone,
+            email,
+            password,
+            state,
+            zipcode,
+            city,
+            neighborhood,
+            patio });
 
         reply.send(customer);
     }

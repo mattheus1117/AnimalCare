@@ -3,8 +3,16 @@ import bcrypt from "bcrypt"
 
 interface CreateCustomerProps {
     name: string;
+    cpf: string;
+    dateOfBirth: string;
+    telephone: string;
     email: string;
     password: string;
+    state: string;
+    zipcode: string;
+    city: string;
+    neighborhood: string;
+    patio: string;
 }
 
 interface LoginCustomerProps {
@@ -44,20 +52,38 @@ class CustomerService {
         }
     };
 
-    async createCustomer({ name, email, password }: CreateCustomerProps) {
+    async createCustomer({ 
+            name,
+            cpf,
+            dateOfBirth,
+            telephone,
+            email,
+            password,
+            state,
+            zipcode,
+            city,
+            neighborhood,
+            patio }: CreateCustomerProps) {
 
-        if(!name || !email || !password){
+        if(!name || !cpf || !dateOfBirth || !telephone || !email || !password || !state || !zipcode || !city || !neighborhood || !patio){
             throw new Error("Preencha todos os campos")
         }
 
         const verifyEmailExist = await prismaClient.customer.findFirst({
             where: {
-                email: email
+                OR: [
+                    {
+                        email: email
+                    },
+                    {
+                        cpf: cpf
+                    }
+                ]
             }
         });
 
         if (verifyEmailExist) {
-            throw new Error("Email já cadastrado.")
+            throw new Error("Email/CPF já cadastrado.")
         }
 
         const saltRounds = 10;
@@ -66,8 +92,16 @@ class CustomerService {
         const customer = await prismaClient.customer.create({
             data: {
                 name,
+                cpf,
+                dateOfBirth,
+                telephone,
                 email,
                 password_hash,
+                state,
+                zipcode,
+                city,
+                neighborhood,
+                patio,
                 status: true
             }
         });
