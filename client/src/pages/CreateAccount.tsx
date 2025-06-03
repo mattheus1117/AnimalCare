@@ -46,7 +46,7 @@ export const CreateAccount = () => {
 
     async function handleOngSubmit(event: React.FormEvent) {
         event.preventDefault();
-    
+
         try {
             const response = await api.post("/ong", ongFormData);
             console.log(response.data);

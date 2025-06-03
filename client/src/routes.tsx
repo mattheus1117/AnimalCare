@@ -6,18 +6,27 @@ import { Adotar } from './pages/Adotar';
 import { Login } from './pages/Login';
 import { CreateAccount } from './pages/CreateAccount';
 
+// Footer
+import { Sobre } from './pages/Sobre';
+import { Contato } from './pages/Contato';
+import { TermosDeUso } from './pages/TermosDeUso';
+
 export const AppRoutes = () => {
     return (
-        <BrowserRouter basename="/AnimalCare"> 
+        <BrowserRouter basename="/AnimalCare">
             <Routes>
-                <Route path='/' element={<Home/>}/>
-                <Route path='/doacao' element={<Doacao/>} />
-                <Route path='/ongs' element={<Ongs/>} />
-                <Route path='/adotar' element={<Adotar/>} />
-                <Route path='/login' element={<Login/>} />
-                <Route path='/create-account' element={<CreateAccount/>} />
+                <Route path='/' element={<Home />} />
+                <Route path='/doacao' element={<Doacao />} />
+                <Route path='/ongs' element={<Ongs />} />
+                <Route path='/adotar' element={<Adotar />} />
+                <Route path='/login' element={<Login />} />
+                <Route path='/create-account' element={<CreateAccount />} />
 
-                <Route path='*' element={<Navigate to ='/' />}/>     
+                <Route path='/sobre' element={<Sobre />} />
+                <Route path='/contato' element={<Contato />} />
+                <Route path='/termos-de-uso' element={<TermosDeUso />} />
+
+                <Route path='*' element={<Navigate to='/' />} />
             </Routes>
         </BrowserRouter>
     );

@@ -22,11 +22,11 @@ body {
 }
 
 .nav-left,
-.nav-center,
-.nav-right {
+.nav-center
+{
     display: flex;
     align-items: center;
-    gap: 5rem;
+    gap: 2rem;
 }
 
 .nome-site {
@@ -43,25 +43,20 @@ body {
 }
 
 /* Estilo dos links */
-.nav a {
-    text-decoration: none;
-}
-
-.nav-center a {
+.nav-center a, button {
     padding: 10px 20px;
     border-radius: 8px;
     color: inherit;
     transition: background-color 0.3s ease;
 }
 
-.nav-center a:hover {
+.nav-center a:hover, button:hover {
     background-color: rgba(255, 255, 255, 0.3); /* camada clara e transparente */
 }
 
 .chat-btn {
     background: none;
     border: none;
-    font-size: 1rem;
     cursor: pointer;
     color: inherit;
 }
@@ -128,7 +123,7 @@ body {
 .footer-right {
     display: flex;
     align-items: center;
-    gap: 2rem;
+    gap: 4rem;
 }
 
 /* Estilizar os links do footer */
@@ -144,7 +139,7 @@ body {
 
 .footer-title {
     font-weight: bold;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
 }
 
 /* ====== Card ======= */

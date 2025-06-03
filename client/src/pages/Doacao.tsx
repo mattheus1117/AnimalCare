@@ -8,12 +8,12 @@ export const Doacao = () => {
 
     return <>
         <Header onChatClick={() => setChatVisivel((v) => !v)} />
-            <h1>DOAÇÃO</h1>
-            <br/>
-            <br/>
-            <br/>Espaço placeholder
-            <br/>
-            <br/>
+        <h1>Doação</h1>
+        <br />
+        <br />
+        <br />Espaço placeholder
+        <br />
+        <br />
         <Footer />
         {chatVisivel && <Chat onClose={() => setChatVisivel(false)} />}
     </>
