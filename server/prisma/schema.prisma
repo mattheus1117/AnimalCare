@@ -19,6 +19,14 @@ model Customer {
   name String
   email String
   password_hash String
+  cpf String
+  dateOfBirth String
+  telephone String
+  state String
+  zipcode String
+  city String
+  neighborhood String
+  patio String
   status Boolean
   created_at DateTime? @default(now())
   updated_at DateTime? @default(now())
