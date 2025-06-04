@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 //import { AnimaisParaAdotar } from '.././AnimaisParaAdotar';
 import ".././style.css"
-import { api } from '../services/api'
+import { useAuth } from '../components/AuthContext';
 
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -32,12 +32,15 @@ export const Adotar = () => {
     const [animalSelecionado, setAnimalSelecionado] = React.useState<Animal | null>(null);
     const [animals, setAnimals] = React.useState<Animal[]>([]);
 
+    const { getWithProactiveAuth } = useAuth();
+
     useEffect(() => {
         loadAnimals();
     }, []);
 
     async function loadAnimals() {
-        const response = await api.get("/animals");
+        //const response = await api.get("/animals");
+        const response = await getWithProactiveAuth("/animals");
         setAnimals(response.data);
     }
 

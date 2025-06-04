@@ -31,7 +31,15 @@ class CustomerController {
         const customerService = new CustomerService();
         const customer = await customerService.loginCustomer({email, password});
 
-        reply.send(customer);
+        reply.setCookie('refreshToken', customer.refreshToken, {
+            path: '/', // envia para toda a aplicação
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production', // apenas HTTPS em produção
+            sameSite: 'strict',
+            maxAge: 7 * 24 * 60 * 60, // 7 dias em segundos
+        });
+
+        reply.send(customer.accessToken);
     }
 
     async handleCreateCustomer(request: FastifyRequest, reply: FastifyReply){

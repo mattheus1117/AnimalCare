@@ -5,19 +5,25 @@ import Footer from "../components/Footer";
 import Chat from "../components/Chat/Chat";
 import { api } from "../services/api";
 
+import { useAuth } from '../components/AuthContext';
+
 export const Login = () => {
     const navigate = useNavigate();
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
     const [chatVisivel, setChatVisivel] = React.useState(false);
 
+    const { login } = useAuth();
+
     async function handleUserLogin(event: React.FormEvent) {
         event.preventDefault();
         try {
             const response = await api.post("/loginCustomer", { email, password });
-            console.log(response.data);
-            // redireciona após sucesso
-            navigate("/dashboard");
+            console.log("Ok!");
+
+            login(response.data);
+
+            navigate("/"); //TODO: fazer o usuario voltar da pagina que estava
         } catch (error) {
             console.error("Erro no login", error);
         }

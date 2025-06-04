@@ -51,7 +51,7 @@ export const CreateAccount = () => {
             const response = await api.post("/ong", ongFormData);
             console.log(response.data);
             // redireciona após sucesso
-            navigate("/");
+            navigate("/login");
         } catch (error) {
             console.error("Erro no login", error);
         }

@@ -6,6 +6,8 @@ import { Adotar } from './pages/Adotar';
 import { Login } from './pages/Login';
 import { CreateAccount } from './pages/CreateAccount';
 
+import PrivateRoute from './components/PrivateRoute'
+
 // Footer
 import { Sobre } from './pages/Sobre';
 import { Contato } from './pages/Contato';
@@ -16,9 +18,19 @@ export const AppRoutes = () => {
         <BrowserRouter basename="/AnimalCare">
             <Routes>
                 <Route path='/' element={<Home />} />
-                <Route path='/doacao' element={<Doacao />} />
+                <Route path='/doacao' element={
+                    <PrivateRoute>
+                        <Doacao />
+                    </PrivateRoute>
+                } />
+                
                 <Route path='/ongs' element={<Ongs />} />
-                <Route path='/adotar' element={<Adotar />} />
+                <Route path='/adotar' element={
+                    <PrivateRoute>
+                        <Adotar />
+                    </PrivateRoute>
+                } />
+                                            
                 <Route path='/login' element={<Login />} />
                 <Route path='/create-account' element={<CreateAccount />} />
 

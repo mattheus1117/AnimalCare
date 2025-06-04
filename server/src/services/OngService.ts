@@ -1,5 +1,34 @@
 import prismaClient from "../prisma";
 import bcrypt from "bcrypt"
+import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+
+// gerar Token do usuário
+dotenv.config();
+
+const JWT_SECRET = process.env.JWT_SECRET!;
+const JWT_REFRESH_SECRET = process.env.JWT_REFRESH_SECRET!;
+
+// cria Access Token (expira em 1 hora)
+export function generateAccessToken(payload: object) {
+  return jwt.sign(payload, JWT_SECRET, { expiresIn: "1h" });
+}
+
+// cria Refresh Token (expira em 7 dias)
+export function generateRefreshToken(payload: object) {
+  return jwt.sign(payload, JWT_REFRESH_SECRET, { expiresIn: "7d" });
+}
+
+// verifica o refresh token e retorna novo access
+export function refreshAccessToken(refreshToken: string) {
+  try {
+    const decoded = jwt.verify(refreshToken, JWT_REFRESH_SECRET) as jwt.JwtPayload;
+    const newAccessToken = generateAccessToken({ userId: decoded.userId, role: decoded.role });
+    return { accessToken: newAccessToken };
+  } catch (err) {
+    throw new Error("Refresh token inválido ou expirado");
+  }
+}
 
 interface CreateOngProps {
     corporateName: string;
@@ -16,6 +45,11 @@ interface CreateOngProps {
     patio: string;
 }
 
+interface LoginOngProps {
+    email: string;
+    password: string;
+}
+
 interface PutOngProps {
     id: string;
 }
@@ -30,6 +64,37 @@ class OngService {
 
         return ongs;
     };
+
+    async loginOng({ email, password }: { email: string; password: string }) {
+        const ong = await prismaClient.ong.findFirst({
+            where: { 
+                email: email
+            }
+        });
+
+        if (!ong) throw new Error("ONG não encontrada");
+
+        const passwordMatch = await bcrypt.compare(password, ong.password_hash);
+        if (!passwordMatch) throw new Error("Senha incorreta");
+
+        const accessToken = jwt.sign(
+            { userId: ong.id, role: "Ong" },
+            process.env.JWT_SECRET as string,
+            { expiresIn: "1h" }
+        );
+
+        const refreshToken = jwt.sign(
+            { userId: ong.id, role: "Ong" },
+            process.env.REFRESH_TOKEN_SECRET as string,
+            { expiresIn: "7d" }
+        );
+
+        return { accessToken, refreshToken };
+  }
+
+    async findOngById(id: string) {
+        return await prismaClient.ong.findUnique({ where: { id } });
+    }
 
     async createOng({ corporateName, cnpj, name, representative, contact, email, password, state, zipcode, city, neighborhood, patio }: CreateOngProps) {
 

@@ -10,7 +10,11 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@fastify/cookie": "^11.0.2",
     "@types/bcrypt": "^5.0.2",
+    "@types/cookie": "^0.6.0",
+    "@types/dotenv": "^6.1.1",
+    "@types/jsonwebtoken": "^9.0.9",
     "@types/node": "^22.15.27",
     "prisma": "^6.8.2",
     "typescript": "^5.8.3"
@@ -19,7 +23,11 @@
     "@fastify/cors": "^11.0.1",
     "@prisma/client": "^6.8.2",
     "bcrypt": "^6.0.0",
+    "dotenv": "^16.5.0",
     "fastify": "^5.3.3",
+    "install": "^0.13.0",
+    "jsonwebtoken": "^9.0.2",
+    "npm": "^11.4.1",
     "tsx": "^4.19.4"
   }
 }

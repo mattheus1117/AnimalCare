@@ -1,5 +1,19 @@
 import prismaClient from "../prisma";
-import bcrypt from "bcrypt"
+import bcrypt from "bcrypt";
+import jwt, { JwtPayload } from 'jsonwebtoken';
+
+const JWT_SECRET = process.env.JWT_SECRET!;
+const JWT_REFRESH_SECRET = process.env.JWT_REFRESH_SECRET!;
+
+// cria Access Token (expira em 1 hora)
+export function generateAccessToken(payload: object) {
+  return jwt.sign(payload, JWT_SECRET, { expiresIn: "1h" });
+}
+
+// cria Refresh Token (expira em 7 dias)
+export function generateRefreshToken(payload: object) {
+  return jwt.sign(payload, JWT_REFRESH_SECRET, { expiresIn: "7d" });
+}
 
 interface CreateCustomerProps {
     name: string;
@@ -31,25 +45,31 @@ class CustomerService {
         return customers;
     };
 
-    async loginCustomer({email, password}: LoginCustomerProps) {
-        const customer = await prismaClient.customer.findFirst({
-            where:{
-                email: email
-            }
-        });
-        
-        if(customer){
-            const match = await bcrypt.compare(password, customer.password_hash);
+    async loginCustomer({ email, password }: { email: string; password: string }) {
+        const customer = await prismaClient.customer.findFirst({ where: { email: email } });
 
-            if(match){
-                return customer;
-            } else {
-                throw new Error("Email e/ou senha incorretos.")
-            }
-            
-        } else {
-            throw new Error("Email e/ou senha incorretos.")
-        }
+        if (!customer) throw new Error("Usuário não encontrado");
+
+        const passwordMatch = await bcrypt.compare(password, customer.password_hash);
+        if (!passwordMatch) throw new Error("Senha incorreta");
+
+        const accessToken = jwt.sign(
+            { userId: customer.id, role: "Customer" },
+            process.env.JWT_SECRET as string,
+            { expiresIn: "1h" }
+        );
+
+        const refreshToken = jwt.sign(
+            { userId: customer.id, role: "Customer" },
+            process.env.REFRESH_TOKEN_SECRET as string,
+            { expiresIn: "7d" }
+        );
+
+        return { accessToken, refreshToken };
+    };
+
+    async findCustomerById(id: string) {
+        return await prismaClient.customer.findUnique({ where: { id } });
     };
 
     async createCustomer({ 
@@ -107,7 +127,7 @@ class CustomerService {
         });
 
         return customer;
-    }
+    };
     
     async deleteCustomer({ id }: DeleteCustomerProps) {
 
@@ -132,7 +152,7 @@ class CustomerService {
         });
 
         return {message: `Cliente ${findCustomer.name} (${findCustomer.id}) deletado com sucesso!`};
-    }
+    };
 }
 
 export { CustomerService }

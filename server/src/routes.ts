@@ -3,6 +3,7 @@ import { FastifyInstance, FastifyPluginOptions, FastifyRequest, FastifyReply } f
 import { CustomerController } from "./controllers/CustomerController";
 import { AnimalController } from "./controllers/AnimalController";
 import { OngController } from "./controllers/OngController";
+import { AuthController } from "./controllers/AuthController";
 
 export async function routes(fastify: FastifyInstance, options: FastifyPluginOptions) {
 
@@ -28,6 +29,10 @@ export async function routes(fastify: FastifyInstance, options: FastifyPluginOpt
         return new OngController().handleListOngs(request, reply);
     });
 
+    fastify.post("/loginOng", async (request: FastifyRequest, reply: FastifyReply) => {
+        return new OngController().handleLoginOng(request, reply);
+    });
+
     fastify.post("/ong", async (request: FastifyRequest, reply: FastifyReply) => {
         return new OngController().handleCreateOng(request, reply);
     });
@@ -51,5 +56,14 @@ export async function routes(fastify: FastifyInstance, options: FastifyPluginOpt
 
     fastify.delete("/animal", async (request: FastifyRequest, reply: FastifyReply) => {
         return new AnimalController().handleDeleteAnimal(request, reply);
+    });
+
+    //Auth
+    fastify.post("/refresh-customer", async (request: FastifyRequest, reply: FastifyReply) => {
+        return new AuthController().handleRefreshCustomer(request, reply);
+    });
+
+    fastify.post("/refresh-ong", async (request: FastifyRequest, reply: FastifyReply) => {
+        return new AuthController().handleRefreshOng(request, reply);
     });
 }
