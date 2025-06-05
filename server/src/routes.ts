@@ -59,11 +59,7 @@ export async function routes(fastify: FastifyInstance, options: FastifyPluginOpt
     });
 
     //Auth
-    fastify.post("/refresh-customer", async (request: FastifyRequest, reply: FastifyReply) => {
-        return new AuthController().handleRefreshCustomer(request, reply);
-    });
-
-    fastify.post("/refresh-ong", async (request: FastifyRequest, reply: FastifyReply) => {
-        return new AuthController().handleRefreshOng(request, reply);
+    fastify.post("/refresh", async (request: FastifyRequest, reply: FastifyReply) => {
+        return new AuthController().handleRefresh(request, reply);
     });
 }

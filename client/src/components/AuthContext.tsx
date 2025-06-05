@@ -62,19 +62,16 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   async function refreshTokenIfNeeded(): Promise<void> {
     const token = localStorage.getItem('token');
-    const userRole = localStorage.getItem('userRole'); // 'customer' ou 'ong'
 
     if (!token || isTokenExpiringSoon(token)) {
-      const refreshUrl = userRole?.toLowerCase() === 'customer' ? '/refresh-customer' : '/refresh-ong';
 
-      console.log(refreshUrl);
-
-      const response = await api.post(refreshUrl, {}, {
+      const response = await api.post(`${import.meta.env.VITE_API_URL}/refresh`, {}, {
         withCredentials: true
       });
-
-      const newAccessToken = response.data.accessToken;
+      
+      const newAccessToken = response.data;
       localStorage.setItem('accessToken', newAccessToken);
+      console.log("refresh!");
     }
   }
 
@@ -85,7 +82,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
     await refreshTokenIfNeeded();
 
-    const accessToken = localStorage.getItem('accessToken');
+    const accessToken = localStorage.getItem('token');
 
     const authConfig: AxiosRequestConfig = {
       ...config,
@@ -97,7 +94,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     };
 
     // api url + caminho 
-    return await api.get(`${import.meta.env.VITE_API_URL}${url}`, authConfig);
+    return api.get<T>(`${import.meta.env.VITE_API_URL}${url}`, authConfig);
   }
 
   return (

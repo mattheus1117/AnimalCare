@@ -3,51 +3,37 @@ import { OngService } from "../services/OngService";
 import { CustomerService } from "../services/CustomerService";
 
 export class AuthService {
-    async refreshCustomer(refreshToken: string) {
-      const decoded = jwt.verify(
-        refreshToken,
-        process.env.REFRESH_TOKEN_SECRET as string
-      ) as jwt.JwtPayload;
+    async refresh(refreshToken: string) {
+      const decoded = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET as string) as { userId: string, role: string };
 
-      const customerId = decoded.userId;
+      let newAccessToken: string;
 
-      const customerService = new CustomerService();
-      const customer = await customerService.findCustomerById(customerId);
+      if (decoded.role.toLowerCase() === "customer") {
+        const customerService = new CustomerService();
+        const customer = await customerService.findCustomerById(decoded.userId);
 
-      if (!customer) {
-        throw new Error(`Ong (${customerId}) não encontrada`);
+        if (!customer) throw new Error("Usuário inválido");
+
+        newAccessToken = jwt.sign(
+          { userId: customer.id, role: "Customer" },
+          process.env.JWT_SECRET as string,
+          { expiresIn: "1h" }
+        );
+      } else if (decoded.role.toLowerCase() === "ong") {
+        const ongService = new OngService();
+        const ong = await ongService.findOngById(decoded.userId);
+
+        if (!ong) throw new Error("Usuário inválido");
+
+        newAccessToken = jwt.sign(
+          { userId: ong.id, role: "Ong" },
+          process.env.JWT_SECRET as string,
+          { expiresIn: "1h" }
+        );
+      } else {
+        throw new Error("Role inválido");
       }
 
-      const newAccessToken = jwt.sign(
-        { userId: customer.id, role: "Customer" },
-        process.env.JWT_SECRET as string,
-        { expiresIn: "1h" }
-      );
-      
-      return { newAccessToken };
-    }
-
-    async refreshOng(refreshToken: string) {
-      const decoded = jwt.verify(
-        refreshToken,
-        process.env.REFRESH_TOKEN_SECRET as string
-      ) as jwt.JwtPayload;
-
-      const ongId = decoded.userId;
-
-      const ongService = new OngService();
-      const ong = await ongService.findOngById(ongId);
-
-      if (!ong) {
-        throw new Error(`Ong (${ongId}) não encontrada`);
-      }
-
-      const newAccessToken = jwt.sign(
-        { userId: ong.id, role: "Ong" },
-        process.env.JWT_SECRET as string,
-        { expiresIn: "1h" }
-      );
-      
-      return { newAccessToken };
+      return newAccessToken;
     }
 }

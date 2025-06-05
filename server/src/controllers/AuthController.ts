@@ -2,7 +2,8 @@ import { FastifyRequest, FastifyReply } from "fastify";
 import { AuthService } from "../services/AuthService";
 
 export class AuthController {
-    async handleRefreshCustomer(request: FastifyRequest, reply: FastifyReply) {
+    async handleRefresh(request: FastifyRequest, reply: FastifyReply) {
+
         const refreshToken = request.cookies.refreshToken;
 
         if (!refreshToken) {
@@ -10,21 +11,8 @@ export class AuthController {
         }
 
         const authService = new AuthService();
-        const newAccessToken = await authService.refreshCustomer(refreshToken);
+        const newAccessToken = await authService.refresh(refreshToken);
 
-        reply.send({ accessToken: newAccessToken });
-    }
-
-    async handleRefreshOng(request: FastifyRequest, reply: FastifyReply) {
-        const refreshToken = request.cookies.refreshToken;
-
-        if (!refreshToken) {
-            throw new Error("Refresh token ausente")
-        }
-
-        const authService = new AuthService();
-        const newAccessToken = await authService.refreshOng(refreshToken);
-
-        reply.send({ accessToken: newAccessToken });
-    }   
+        reply.send(newAccessToken);
+    } 
 }
