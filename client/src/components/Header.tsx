@@ -9,12 +9,13 @@ export default function Navbar({ onChatClick }: { onChatClick: () => void }) {
                 </Link>
             </div>
             <div className="nav-center">
-                <Link to='/doacao'>
-                    Doação
-                </Link>
+
+                <button onClick={onChatClick} className="doacao-btn">Doação</button>
+
                 <Link to='/ongs'>
                     ONGs/Protetores
                 </Link>
+
                 <button onClick={onChatClick} className="chat-btn">Chat</button>
             </div>
             <div className="nav-right">
