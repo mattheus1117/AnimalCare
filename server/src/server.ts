@@ -22,7 +22,7 @@ app.setErrorHandler((error, request, reply)=> {
 const start = async() => {
 
     await app.register(cors, {
-        origin: 'http://localhost:5174', // Front-end
+        origin: 'http://localhost:5173', // Front-end
         credentials: true                // Para aceitar cookies no front
     });
 
