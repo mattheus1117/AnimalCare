@@ -13,12 +13,22 @@ export const Dica04 = () => {
       onChatClick={() => setChatVisivel((v) => !v)}
       onDoacaoClick={() => setDoacaoVisivel((v) => !v)}
     />
-    <h1>Dica 04</h1>
-    <br />
-    <br />
-    <br /> Dica 04
-    <br />
-    <br />
+    <main className="dica-container">
+      <div className="dica-content">
+        <h1>Dica 4</h1>
+        <div className="dica-image">
+          <img src="/AnimalCare/Images/Luna.jpg" alt="Luna" />
+        </div>
+        <div className="dica-texto">
+          <p>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sed itaque odit ullam dolores. Vel quaerat magni expedita, consequuntur, aspernatur maxime itaque autem sapiente porro natus deleniti tempora quos perspiciatis enim!
+            Illum sed quibusdam cumque reprehenderit qui error magnam! Culpa excepturi, magnam provident id quibusdam assumenda, aspernatur repellat, dicta amet consectetur ex eum placeat. Ea labore cumque excepturi magni qui voluptas?
+            Doloribus nam assumenda cum quas, ab neque sunt! Accusantium ipsam veniam perferendis laudantium aliquid molestiae beatae! Sit maxime quae rem similique. Dolores possimus ipsum numquam laborum tenetur eum dolorem sapiente.
+
+          </p>
+        </div>
+      </div>
+    </main>
     <Footer />
 
     {chatVisivel && <Chat onClose={() => setChatVisivel(false)} />}
