@@ -5,6 +5,13 @@ import { Ongs } from './pages/Ongs';
 import { QueroAdotar } from './pages/QueroAdotar';
 import { Login } from './pages/Login';
 import { CreateAccount } from './pages/CreateAccount';
+import { Dica01 } from './pages/Dicas/Dica01';
+import { Dica02 } from './pages/Dicas/Dica02';
+import { Dica03 } from './pages/Dicas/Dica03';
+import { Dica04 } from './pages/Dicas/Dica04';
+import { Dica05 } from './pages/Dicas/Dica05';
+import { Dica06 } from './pages/Dicas/Dica06';
+
 
 // import PrivateRoute from './components/PrivateRoute'
 
@@ -18,6 +25,14 @@ export const AppRoutes = () => {
         <BrowserRouter basename="/AnimalCare">
             <Routes>
                 <Route path='/' element={<Home />} />
+
+                <Route path="/dica-1" element={<Dica01 />} />
+                <Route path="/dica-2" element={<Dica02 />} />
+                <Route path="/dica-3" element={<Dica03 />} />
+                <Route path="/dica-4" element={<Dica04 />} />
+                <Route path="/dica-5" element={<Dica05 />} />
+                <Route path="/dica-6" element={<Dica06 />} />
+
 
                 <Route path='/ongs' element={<Ongs />} />
                 <Route path='/adotar' element={

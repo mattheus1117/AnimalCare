@@ -4,6 +4,7 @@ import Footer from "../components/Footer";
 import Chat from "../components/Chat/Chat";
 import { useAuth } from '../components/AuthContext';
 import DoacaoPopup from "../components/Doacao/Doacao";
+import { Link } from 'react-router-dom';
 
 import ".././dicas.css"
 
@@ -31,7 +32,7 @@ export const Home = () => {
                     <p>Dicas para ajudar os animais, Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
                 </div>
                 <div className="card-footer">
-                    <button className="card-button">Mais informações</button>
+                    <Link to="/dica-1" className="card-button">Mais informações</Link>
                 </div>
             </div>
 
@@ -43,7 +44,8 @@ export const Home = () => {
                     <p>Dicas para ajudar os animais, Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
                 </div>
                 <div className="card-footer">
-                    <button className="card-button">Mais informações</button>
+                    <Link to="/dica-2" className="card-button">Mais informações</Link>
+
                 </div>
             </div>
 
@@ -55,7 +57,7 @@ export const Home = () => {
                     <p>Dicas para ajudar os animais, Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
                 </div>
                 <div className="card-footer">
-                    <button className="card-button">Mais informações</button>
+                    <Link to="/dica-3" className="card-button">Mais informações</Link>
                 </div>
             </div>
 
@@ -67,7 +69,8 @@ export const Home = () => {
                     <p>Dicas para ajudar os animais, Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
                 </div>
                 <div className="card-footer">
-                    <button className="card-button">Mais informações</button>
+                    <Link to="/dica-4" className="card-button">Mais informações</Link>
+
                 </div>
             </div>
 
@@ -79,7 +82,8 @@ export const Home = () => {
                     <p>Dicas para ajudar os animais, Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
                 </div>
                 <div className="card-footer">
-                    <button className="card-button">Mais informações</button>
+                    <Link to="/dica-5" className="card-button">Mais informações</Link>
+
                 </div>
             </div>
 
@@ -91,7 +95,8 @@ export const Home = () => {
                     <p>Dicas para ajudar os animais, Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
                 </div>
                 <div className="card-footer">
-                    <button className="card-button">Mais informações</button>
+                    <Link to="/dica-6" className="card-button">Mais informações</Link>
+
                 </div>
             </div>
         </div>
