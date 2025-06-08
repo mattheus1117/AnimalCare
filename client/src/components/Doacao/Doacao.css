@@ -1,82 +1,105 @@
 .doacao-popup {
   position: fixed;
-  bottom: 0rem;
-  right: 0rem;
-  width: 350px;
-  height: 580px;
+  top: 40.5%;
+  left: 50%;
+  width: 400px;
+  height: 500px;
   background-color: rgb(200, 200, 200);
   border: 2px solid #ccc;
   border-radius: 1rem;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   z-index: 999;
+  transform: translate(-50%, -50%);
+  font-family: sans-serif;
 }
 
 .doacao-header {
-  color: orange;
-  background-color: #828282;
-  padding: 1rem;
-  border-bottom: 1px solid #828282;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: black;
+  text-align: center;
+  position: relative;
+  margin-top: 1rem;
 }
 
-.doacao-header h3 {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    margin: 0;
-}
-
-.doacao-header button {
-    background-color: #828282;
-    border: none;
-    color: white;
-    font-size: 1.2rem;
-    padding: 0 0.6rem;
-    cursor: pointer;
+.close-btn {
+  position: absolute;
+  right: 1rem;
+  top: 0.5rem;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: black;
 }
 
 .doacao-body {
-  flex: 1;
-  padding: 1rem;
-  overflow-y: auto;
+  background-color: #3f3f3f;
+  border-radius: 1rem;
+  padding: 2rem 1.5rem;
+  margin: 1rem;
+  color: white;
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
+  flex-grow: 1;
 }
 
-.doacao-msg {
-  background-color: #aaaaaa;
-  margin-bottom: 0.5rem;
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
-  max-width: 80%;
-  word-wrap: break-word;
-  white-space: pre-wrap;
-  align-self: flex-end;
+.doacao-body h4 {
+  color: #ffc107;
+  font-size: 1.3rem;
+  text-align: center;
+  margin-bottom: 1rem;
 }
 
-.doacao-footer {
-  display: flex;
-  border-top: 1px solid #ccc;
-  padding: 0.5rem;
+.doacao-body ul {
+  list-style-type: disc;
+  padding-left: 1.2rem;
+  margin-bottom: 1.5rem;
 }
 
-.doacao-footer input {
-  flex: 1;
-  padding: 0.5rem;
-  border-radius: 0.5rem;
-  border: 1px solid #ccc;
-  margin-right: 0.5rem;
+.doacao-body ul li {
+  color: #ffc107;
+  margin-bottom: 0.6rem;
+  font-size: 0.95rem;
 }
 
-.doacao-footer button {
-  padding: 0.5rem 1rem;
-  background-color: rgb(219, 168, 0);
+.doacao-body label {
+  font-weight: 500;
+  margin-bottom: 0.4rem;
+  color: white;
+  font-size: 0.9rem;
+}
+
+.doacao-body input {
+  padding: 0.6rem 1rem;
+  border-radius: 1rem;
   border: none;
-  border-radius: 0.5rem;
+  background-color: #e0e0e0;
+  font-size: 1rem;
+  color: #333;
+  outline: none;
+  margin-bottom: 1rem;
+}
+
+.doar-btn {
+  width: 100%;
+  padding: 0.9rem;
+  background-color: #ffc107;
+  color: black;
+  border: none;
+  border-radius: 1rem;
+  font-size: 1.1rem;
+  font-weight: bold;
   cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.doar-btn:hover {
+  background-color: #e0a800;
+}
+
+.valor-input{
+  padding-top: 2;
 }

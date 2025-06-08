@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
-//import { AnimaisParaAdotar } from '.././AnimaisParaAdotar';
-import ".././style.css"
 import { useAuth } from '../components/AuthContext';
-
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Chat from "../components/Chat/Chat";
 import Card from '../components/Card';
 import AnimalPopup from '../components/AnimalPopup/AnimalPopup';
+import DoacaoPopup from "../components/Doacao/Doacao";
+
+import ".././style.css"
 
 interface Animal {
     pictureBase64: string;
@@ -23,13 +23,11 @@ interface Animal {
     description?: string;
 }
 
-// {AnimaisParaAdotar.map((animal, index) => (
-//     <Card key={index} {...animal} onClick={() => setAnimalSelecionado(animal)} />
-// ))}
-
-export const Adotar = () => {
-    const [chatVisivel, setChatVisivel] = React.useState(false);
+export const QueroAdotar = () => {
     const [animalSelecionado, setAnimalSelecionado] = React.useState<Animal | null>(null);
+    const [chatVisivel, setChatVisivel] = React.useState(false);
+    const [doacaoVisivel, setDoacaoVisivel] = React.useState(false);
+
     const [animals, setAnimals] = React.useState<Animal[]>([]);
 
     const { getWithProactiveAuth } = useAuth();
@@ -45,7 +43,10 @@ export const Adotar = () => {
     }
 
     return <>
-        <Header onChatClick={() => setChatVisivel((v) => !v)} />
+        <Header
+            onChatClick={() => setChatVisivel((v) => !v)}
+            onDoacaoClick={() => setDoacaoVisivel((v) => !v)}
+        />
         <div className="card-container">
 
             {animals.map((animal) => (
@@ -54,7 +55,9 @@ export const Adotar = () => {
 
         </div>
         <Footer />
+
         {chatVisivel && <Chat onClose={() => setChatVisivel(false)} />}
+        {doacaoVisivel && <DoacaoPopup onClose={() => setDoacaoVisivel(false)} />}
         {animalSelecionado && (<AnimalPopup animal={animalSelecionado} onClose={() => setAnimalSelecionado(null)} />)}
     </>
 }

@@ -2,14 +2,19 @@ import React from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Chat from "../components/Chat/Chat";
+import DoacaoPopup from "../components/Doacao/Doacao";
 
-import ".././teste.css"
+import ".././footer.css"
 
 export const Sobre = () => {
     const [chatVisivel, setChatVisivel] = React.useState(false);
+    const [doacaoVisivel, setDoacaoVisivel] = React.useState(false);
 
     return <>
-        <Header onChatClick={() => setChatVisivel((v) => !v)} />
+           <Header
+                        onChatClick={() => setChatVisivel((v) => !v)}
+            onDoacaoClick={() => setDoacaoVisivel((v) => !v)}
+        />
         <div className="sobre">
             <h1>Sobre o AnimalCare</h1>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et aliquet sapien. Cras nec euismod felis, at pharetra augue. Duis lacinia ut lacus non tincidunt. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam tempus sem lorem, sit amet pretium libero finibus nec. Duis in urna arcu. Nam sollicitudin eros non facilisis ullamcorper. In hac habitasse platea dictumst. Mauris interdum aliquam metus in finibus. Duis porta laoreet purus vel imperdiet. In ut tincidunt dolor, id venenatis velit. In id pretium dui, sit amet convallis lectus. <br /><br />
@@ -24,6 +29,8 @@ export const Sobre = () => {
         </div>
 
         <Footer />
+
         {chatVisivel && <Chat onClose={() => setChatVisivel(false)} />}
+        {doacaoVisivel && <DoacaoPopup onClose={() => setDoacaoVisivel(false)} />}
     </>
 }

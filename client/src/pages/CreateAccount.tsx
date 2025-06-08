@@ -4,11 +4,13 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Chat from "../components/Chat/Chat";
 import { api } from "../services/api";
+import DoacaoPopup from "../components/Doacao/Doacao"; 
 
 export const CreateAccount = () => {
     const navigate = useNavigate();
     const [showOngForm, setShowOngForm] = React.useState(false);
     const [chatVisivel, setChatVisivel] = React.useState(false);
+    const [doacaoVisivel, setDoacaoVisivel] = React.useState(false);
 
     const [ongFormData, setOngFormData] = React.useState({
         corporateName: "",
@@ -59,7 +61,9 @@ export const CreateAccount = () => {
 
     return (
         <>
-            <Header onChatClick={() => setChatVisivel((v) => !v)} />
+            <Header onChatClick={() => setChatVisivel((v) => !v)}
+                onDoacaoClick={() => setDoacaoVisivel((v) => !v)} />
+
 
             <div className="bg-gray-100 min-h-screen flex flex-col items-center justify-center px-4">
                 <h1 className="text-4xl font-bold text-gray-800 mb-8 text-center">
@@ -185,7 +189,9 @@ export const CreateAccount = () => {
             </div>
 
             <Footer />
+
             {chatVisivel && <Chat onClose={() => setChatVisivel(false)} />}
+            {doacaoVisivel && <DoacaoPopup onClose={() => setDoacaoVisivel(false)} />}
         </>
     );
 };

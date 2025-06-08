@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { Home } from './pages/Home';
 // import { Doacao } from './pages/Doacao';
 import { Ongs } from './pages/Ongs';
-import { Adotar } from './pages/Adotar';
+import { QueroAdotar } from './pages/QueroAdotar';
 import { Login } from './pages/Login';
 import { CreateAccount } from './pages/CreateAccount';
 
@@ -21,7 +21,7 @@ export const AppRoutes = () => {
 
                 <Route path='/ongs' element={<Ongs />} />
                 <Route path='/adotar' element={
-                    <Adotar />
+                    <QueroAdotar />
                 } />
 
                 <Route path='/login' element={<Login />} />

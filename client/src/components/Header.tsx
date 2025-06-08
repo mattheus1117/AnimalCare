@@ -1,6 +1,11 @@
 import { Link } from 'react-router-dom'
 
-export default function Navbar({ onChatClick }: { onChatClick: () => void }) {
+interface NavbarProps {
+    onChatClick: () => void;
+    onDoacaoClick: () => void;
+}
+
+export default function Navbar({ onChatClick, onDoacaoClick }: NavbarProps) {
     return (
         <nav className="nav h-24">
             <div className="nav-left">
@@ -8,9 +13,9 @@ export default function Navbar({ onChatClick }: { onChatClick: () => void }) {
                     Animal Care
                 </Link>
             </div>
-            <div className="nav-center">
 
-                <button onClick={onChatClick} className="doacao-btn">Doação</button>
+            <div className="nav-center">
+                <button onClick={onDoacaoClick} className="doacao-btn">Doação</button>
 
                 <Link to='/ongs'>
                     ONGs/Protetores
@@ -18,6 +23,7 @@ export default function Navbar({ onChatClick }: { onChatClick: () => void }) {
 
                 <button onClick={onChatClick} className="chat-btn">Chat</button>
             </div>
+
             <div className="nav-right">
                 <Link to='/adotar' className="Qadotar">
                     Quero Adotar
