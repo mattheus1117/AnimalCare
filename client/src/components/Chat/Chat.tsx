@@ -16,7 +16,7 @@ export default function ChatPopup({ onClose }: { onClose: () => void }) {
     <div className="chat-popup">
       <div className="chat-header">
         <h3>Chat</h3>
-        <button onClick={onClose}>&times;</button>
+        <button className="close-btn" onClick={onClose}>&times;</button>
       </div>
       <div className="chat-body">
         {mensagens.map((msg, index) => (
