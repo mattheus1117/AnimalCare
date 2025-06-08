@@ -21,12 +21,82 @@ export const Home = () => {
             onChatClick={() => setChatVisivel((v) => !v)}
             onDoacaoClick={() => setDoacaoVisivel((v) => !v)}
         />
-        <h1>Dicas</h1>
-        <br />
-        <br />
-        <br />Espaço placeholder
-        <br />
-        <br />
+
+        <div className="card-container">
+            <div className="card">
+                <div className="imagem">
+                    <img src="AnimalCare/Images/Luna.jpg" alt="imagem" />
+                </div>
+                <div className="card-body">
+                    <p>Dicas para ajudar os animais, Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
+                </div>
+                <div className="card-footer">
+                    <button className="card-button">Mais informações</button>
+                </div>
+            </div>
+
+            <div className="card">
+                <div className="imagem">
+                    <img src="AnimalCare/Images/Luna.jpg" alt="imagem" />
+                </div>
+                <div className="card-body">
+                    <p>Dicas para ajudar os animais, Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
+                </div>
+                <div className="card-footer">
+                    <button className="card-button">Mais informações</button>
+                </div>
+            </div>
+
+            <div className="card">
+                <div className="imagem">
+                    <img src="AnimalCare/Images/Luna.jpg" alt="imagem" />
+                </div>
+                <div className="card-body">
+                    <p>Dicas para ajudar os animais, Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
+                </div>
+                <div className="card-footer">
+                    <button className="card-button">Mais informações</button>
+                </div>
+            </div>
+
+            <div className="card">
+                <div className="imagem">
+                    <img src="AnimalCare/Images/Luna.jpg" alt="imagem" />
+                </div>
+                <div className="card-body">
+                    <p>Dicas para ajudar os animais, Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
+                </div>
+                <div className="card-footer">
+                    <button className="card-button">Mais informações</button>
+                </div>
+            </div>
+
+            <div className="card">
+                <div className="imagem">
+                    <img src="AnimalCare/Images/Luna.jpg" alt="imagem" />
+                </div>
+                <div className="card-body">
+                    <p>Dicas para ajudar os animais, Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
+                </div>
+                <div className="card-footer">
+                    <button className="card-button">Mais informações</button>
+                </div>
+            </div>
+
+            <div className="card">
+                <div className="imagem">
+                    <img src="AnimalCare/Images/Luna.jpg" alt="imagem" />
+                </div>
+                <div className="card-body">
+                    <p>Dicas para ajudar os animais, Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
+                </div>
+                <div className="card-footer">
+                    <button className="card-button">Mais informações</button>
+                </div>
+            </div>
+        </div>
+
+
         <Footer />
 
         {chatVisivel && <Chat onClose={() => setChatVisivel(false)} />}

@@ -18,7 +18,7 @@ interface CardProps {
 }
 
 export default function Card({ animal, onClick }: CardProps) {
-    if(animal.status == 'PD'){
+    if (animal.status == 'PD') {
         return (
             <div className="card" onClick={onClick}>
                 <img src={`data:image/jpeg;charset=utf-8;base64,${animal.pictureBase64}`} alt={animal.name} className="card-img" />
