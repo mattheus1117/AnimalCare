@@ -1,3 +1,6 @@
+import ".././css/style.css"
+import ".././css/Card.css"
+
 interface Animal {
     pictureBase64: string;
     name: string;
@@ -20,12 +23,12 @@ interface CardProps {
 export default function Card({ animal, onClick }: CardProps) {
     if (animal.status == 'PD') {
         return (
-            <div className="QAdota" onClick={onClick}>
-                <img src={`data:image/jpeg;charset=utf-8;base64,${animal.pictureBase64}`} alt={animal.name} className="QAdota-img" />
-                <div className="QAdota-info">
+            <div className="QAdotar" onClick={onClick}>
+                <img src={`data:image/jpeg;charset=utf-8;base64,${animal.pictureBase64}`} alt={animal.name} className="QAdotar-img" />
+                <div className="QAdotar-info">
                     <h3>{animal.name}</h3>
                     <p>{animal.location}</p>
-                    <button className="QAdota-button">Mais Informações</button>
+                    <button className="QAdotar-button">Mais Informações</button>
                 </div>
             </div>
         );

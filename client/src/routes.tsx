@@ -12,7 +12,6 @@ import { Dica04 } from './pages/Dicas/Dica04';
 import { Dica05 } from './pages/Dicas/Dica05';
 import { Dica06 } from './pages/Dicas/Dica06';
 
-
 // import PrivateRoute from './components/PrivateRoute'
 
 // Footer
