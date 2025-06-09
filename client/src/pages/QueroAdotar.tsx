@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useAuth } from '../components/AuthContext';
+
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Chat from "../components/Chat/Chat";
@@ -7,7 +7,9 @@ import Card from '../components/Card';
 import AnimalPopup from '../components/AnimalPopup/AnimalPopup';
 import DoacaoPopup from "../components/Doacao/Doacao";
 
-import ".././style.css"
+import { useAuth } from '../components/AuthContext';
+import ".././css/Card.css"
+import ".././css/style.css"
 
 interface Animal {
     pictureBase64: string;
@@ -47,7 +49,7 @@ export const QueroAdotar = () => {
             onChatClick={() => setChatVisivel((v) => !v)}
             onDoacaoClick={() => setDoacaoVisivel((v) => !v)}
         />
-        <div className="card-container">
+        <div className="QAdotar-container">
 
             {animals.map((animal) => (
                 <Card animal={animal} onClick={() => setAnimalSelecionado(animal)} />

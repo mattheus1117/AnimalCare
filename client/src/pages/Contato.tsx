@@ -2,9 +2,10 @@ import React from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Chat from "../components/Chat/Chat";
-import DoacaoPopup from "../components/Doacao/Doacao"; 
+import DoacaoPopup from "../components/Doacao/Doacao";
 
-import ".././footer.css"
+import ".././css/style.css"
+import ".././css/Footer.css"
 
 export const Contato = () => {
     const [chatVisivel, setChatVisivel] = React.useState(false);

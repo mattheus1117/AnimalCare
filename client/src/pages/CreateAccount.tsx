@@ -1,10 +1,11 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Chat from "../components/Chat/Chat";
+import DoacaoPopup from "../components/Doacao/Doacao";
+
 import { api } from "../services/api";
-import DoacaoPopup from "../components/Doacao/Doacao"; 
+import { useNavigate } from "react-router-dom";
 
 export const CreateAccount = () => {
     const navigate = useNavigate();

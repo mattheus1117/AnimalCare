@@ -3,6 +3,7 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import Chat from "../../components/Chat/Chat";
 import DoacaoPopup from "../../components/Doacao/Doacao"
+import '../../css/dicasPages.css';
 
 export const Dica05 = () => {
   const [chatVisivel, setChatVisivel] = React.useState(false);

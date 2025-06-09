@@ -4,7 +4,8 @@ import Footer from "../components/Footer";
 import Chat from "../components/Chat/Chat";
 import DoacaoPopup from "../components/Doacao/Doacao";
 
-import ".././footer.css"
+import ".././css/style.css"
+import ".././css/Footer.css"
 
 export const TermosDeUso = () => {
     const [chatVisivel, setChatVisivel] = React.useState(false);

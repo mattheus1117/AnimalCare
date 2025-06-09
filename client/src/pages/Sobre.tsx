@@ -4,15 +4,16 @@ import Footer from "../components/Footer";
 import Chat from "../components/Chat/Chat";
 import DoacaoPopup from "../components/Doacao/Doacao";
 
-import ".././footer.css"
+import ".././css/style.css"
+import ".././css/Footer.css"
 
 export const Sobre = () => {
     const [chatVisivel, setChatVisivel] = React.useState(false);
     const [doacaoVisivel, setDoacaoVisivel] = React.useState(false);
 
     return <>
-           <Header
-                        onChatClick={() => setChatVisivel((v) => !v)}
+        <Header
+            onChatClick={() => setChatVisivel((v) => !v)}
             onDoacaoClick={() => setDoacaoVisivel((v) => !v)}
         />
         <div className="sobre">

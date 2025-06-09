@@ -20,12 +20,12 @@ interface CardProps {
 export default function Card({ animal, onClick }: CardProps) {
     if (animal.status == 'PD') {
         return (
-            <div className="card" onClick={onClick}>
-                <img src={`data:image/jpeg;charset=utf-8;base64,${animal.pictureBase64}`} alt={animal.name} className="card-img" />
-                <div className="card-info">
+            <div className="QAdota" onClick={onClick}>
+                <img src={`data:image/jpeg;charset=utf-8;base64,${animal.pictureBase64}`} alt={animal.name} className="QAdota-img" />
+                <div className="QAdota-info">
                     <h3>{animal.name}</h3>
                     <p>{animal.location}</p>
-                    <button className="card-button">Mais Informações</button>
+                    <button className="QAdota-button">Mais Informações</button>
                 </div>
             </div>
         );

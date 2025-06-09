@@ -3,6 +3,7 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import Chat from "../../components/Chat/Chat";
 import DoacaoPopup from "../../components/Doacao/Doacao"
+import '../../css/dicasPages.css';
 
 export const Dica02 = () => {
   const [chatVisivel, setChatVisivel] = React.useState(false);
@@ -15,7 +16,7 @@ export const Dica02 = () => {
     />
     <main className="dica-container">
       <div className="dica-content">
-        <h1>Dica 2</h1>
+        <h1>Dica 1</h1>
         <div className="dica-image">
           <img src="/AnimalCare/Images/Luna.jpg" alt="Luna" />
         </div>

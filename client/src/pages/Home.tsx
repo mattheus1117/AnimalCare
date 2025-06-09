@@ -2,11 +2,12 @@ import React, { useEffect } from 'react';
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Chat from "../components/Chat/Chat";
-import { useAuth } from '../components/AuthContext';
 import DoacaoPopup from "../components/Doacao/Doacao";
+
+import { useAuth } from '../components/AuthContext';
 import { Link } from 'react-router-dom';
 
-import ".././dicas.css"
+import ".././css/Dicas.css"
 
 export const Home = () => {
     const { getWithProactiveAuth } = useAuth();

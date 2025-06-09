@@ -1,5 +1,8 @@
 import { Link } from 'react-router-dom'
 
+import ".././css/style.css"
+import ".././css/Header.css"
+
 interface NavbarProps {
     onChatClick: () => void;
     onDoacaoClick: () => void;
