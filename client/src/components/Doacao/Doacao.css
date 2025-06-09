@@ -3,10 +3,10 @@
   top: 40.5%;
   left: 50%;
   width: 400px;
-  height: 500px;
-  background-color: rgb(200, 200, 200);
-  border: 2px solid #ccc;
-  border-radius: 1rem;
+  height: 600px;
+  background-color: #d3d3d3;
+  border: 1px solid black;
+  border-radius: 0.4rem;
   display: flex;
   flex-direction: column;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -17,7 +17,6 @@
 
 .doacao-header {
   font-size: 2.5rem;
-  font-weight: bold;
   color: black;
   text-align: center;
   position: relative;
@@ -33,12 +32,10 @@
   font-size: 2rem;
   cursor: pointer;
   color: black;
-
 }
 
 .doacao-body {
-  background-color: #3f3f3f;
-  border-radius: 1rem;
+ background-color: #3f3f3f;
   padding: 2rem 1.5rem;
   margin: 1rem;
   color: white;
@@ -51,7 +48,8 @@
   color: #ffc107;
   font-size: 1.3rem;
   text-align: center;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
+  padding: 0.5rem;
 }
 
 .doacao-body ul {
@@ -62,7 +60,7 @@
 
 .doacao-body ul li {
   color: #ffc107;
-  margin-bottom: 0.6rem;
+  margin-bottom: 2rem;
   font-size: 0.95rem;
 }
 
@@ -74,10 +72,9 @@
 }
 
 .doacao-body input {
-  padding: 0.6rem 1rem;
+  padding: 0.8rem 1rem;
   border-radius: 1rem;
-  border: none;
-  background-color: #e0e0e0;
+  background-color: #d3d3d3;
   font-size: 1rem;
   color: #333;
   outline: none;
@@ -86,11 +83,9 @@
 
 .doar-btn {
   width: 100%;
-  padding: 0.9rem;
-  background-color: #ffc107;
-  color: black;
-  border: none;
-  border-radius: 1rem;
+  padding: 1rem;
+  background-color: #e5a000;
+  color: white;
   font-size: 1.1rem;
   font-weight: bold;
   cursor: pointer;
@@ -98,7 +93,7 @@
 }
 
 .doar-btn:hover {
-  background-color: #e0a800;
+  background-color: #ffb300;
 }
 
 .valor-input{

@@ -1,15 +1,17 @@
 .dica-container {
-  padding: 2rem;
+  padding: 0.2rem;
+  padding-bottom: 2rem;
   max-width: 960px;
   margin: 0 auto;
   color: #333;
 }
 
 .dica-content h1 {
+  padding-top: 2rem;
   text-align: center;
   font-size: 2.5rem;
   color: #1e1e1e;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.2rem;
 }
 
 .dica-image {
@@ -30,5 +32,5 @@
   font-size: 1.1rem;
   line-height: 1.7;
   text-align: justify;
-  padding: 2rem;
+  padding: 0.2rem;
 }
