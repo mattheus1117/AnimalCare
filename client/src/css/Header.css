@@ -83,3 +83,47 @@
     transform: translateY(0);
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
 }
+
+@media (max-width: 768px) {
+    .nav {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto;
+        grid-template-areas:
+            "left"
+            "center"
+            "right";
+        row-gap: 1rem;
+        padding: 1.5rem;
+        text-align: center;
+    }
+
+    .nav-left {
+        grid-area: left;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .nav-center {
+        grid-area: center;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .nav-right {
+        grid-area: right;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .nome-site {
+        font-size: 2rem;
+    }
+
+    .nav-center a,
+    .nav-center button {
+        padding: 8px 16px;
+        font-size: 2vh;
+    }
+}
+
