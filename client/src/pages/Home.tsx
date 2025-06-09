@@ -30,73 +30,73 @@ export const Home = () => {
                     <img src="AnimalCare/Images/Luna.jpg" alt="imagem" />
                 </div>
                 <div className="card-body">
-                    <p>Dicas para ajudar os animais, Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque consequatur quasi minus pariatur accusamus cupiditate laborum velit.</p>
                 </div>
                 <div className="card-footer">
-                    <Link to="/dica-1" className="card-button">Mais informações</Link>
+                    <Link to="/dica-1" className="card-button">Leia mais</Link>
                 </div>
             </div>
 
             <div className="card">
                 <div className="imagem">
-                    <img src="AnimalCare/Images/Luna.jpg" alt="imagem" />
+                    <img src="AnimalCare/Images/Caramelo.jpg" alt="imagem" />
                 </div>
                 <div className="card-body">
-                    <p>Dicas para ajudar os animais, Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque consequatur quasi minus pariatur accusamus cupiditate laborum velit.</p>
                 </div>
                 <div className="card-footer">
-                    <Link to="/dica-2" className="card-button">Mais informações</Link>
-
-                </div>
-            </div>
-
-            <div className="card">
-                <div className="imagem">
-                    <img src="AnimalCare/Images/Luna.jpg" alt="imagem" />
-                </div>
-                <div className="card-body">
-                    <p>Dicas para ajudar os animais, Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
-                </div>
-                <div className="card-footer">
-                    <Link to="/dica-3" className="card-button">Mais informações</Link>
-                </div>
-            </div>
-
-            <div className="card">
-                <div className="imagem">
-                    <img src="AnimalCare/Images/Luna.jpg" alt="imagem" />
-                </div>
-                <div className="card-body">
-                    <p>Dicas para ajudar os animais, Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
-                </div>
-                <div className="card-footer">
-                    <Link to="/dica-4" className="card-button">Mais informações</Link>
+                    <Link to="/dica-2" className="card-button">Leia mais</Link>
 
                 </div>
             </div>
 
             <div className="card">
                 <div className="imagem">
-                    <img src="AnimalCare/Images/Luna.jpg" alt="imagem" />
+                    <img src="AnimalCare/Images/Laranjinha.jpg" alt="imagem" />
                 </div>
                 <div className="card-body">
-                    <p>Dicas para ajudar os animais, Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque consequatur quasi minus pariatur accusamus cupiditate laborum velit.</p>
                 </div>
                 <div className="card-footer">
-                    <Link to="/dica-5" className="card-button">Mais informações</Link>
+                    <Link to="/dica-3" className="card-button">Leia mais</Link>
+                </div>
+            </div>
+
+            <div className="card">
+                <div className="imagem">
+                    <img src="AnimalCare/Images/Foguete.jpg" alt="imagem" />
+                </div>
+                <div className="card-body">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque consequatur quasi minus pariatur accusamus cupiditate laborum velit.</p>
+                </div>
+                <div className="card-footer">
+                    <Link to="/dica-4" className="card-button">Leia mais</Link>
 
                 </div>
             </div>
 
             <div className="card">
                 <div className="imagem">
-                    <img src="AnimalCare/Images/Luna.jpg" alt="imagem" />
+                    <img src="AnimalCare/Images/Gato.jpg" alt="imagem" />
                 </div>
                 <div className="card-body">
-                    <p>Dicas para ajudar os animais, Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque consequatur quasi minus pariatur accusamus cupiditate laborum velit.</p>
                 </div>
                 <div className="card-footer">
-                    <Link to="/dica-6" className="card-button">Mais informações</Link>
+                    <Link to="/dica-5" className="card-button">Leia mais</Link>
+
+                </div>
+            </div>
+
+            <div className="card">
+                <div className="imagem">
+                    <img src="AnimalCare/Images/Max.jpg" alt="imagem" />
+                </div>
+                <div className="card-body">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque consequatur quasi minus pariatur accusamus cupiditate laborum velit.</p>
+                </div>
+                <div className="card-footer">
+                    <Link to="/dica-6" className="card-button">Leia mais</Link>
 
                 </div>
             </div>

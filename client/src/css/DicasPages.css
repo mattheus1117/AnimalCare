@@ -2,7 +2,6 @@
   padding: 2rem;
   max-width: 960px;
   margin: 0 auto;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #333;
 }
 
@@ -31,8 +30,5 @@
   font-size: 1.1rem;
   line-height: 1.7;
   text-align: justify;
-  background-color: #f8f8f8;
   padding: 2rem;
-  border-radius: 1rem;
-  box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
 }

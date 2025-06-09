@@ -18,7 +18,7 @@ export const Dica06 = () => {
       <div className="dica-content">
         <h1>Dica 6</h1>
         <div className="dica-image">
-          <img src="/AnimalCare/Images/Luna.jpg" alt="Luna" />
+          <img src="/AnimalCare/Images/Max.jpg" alt="Max" />
         </div>
         <div className="dica-texto">
           <p>
