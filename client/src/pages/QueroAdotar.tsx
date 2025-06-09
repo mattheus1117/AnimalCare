@@ -49,6 +49,10 @@ export const QueroAdotar = () => {
             onChatClick={() => setChatVisivel((v) => !v)}
             onDoacaoClick={() => setDoacaoVisivel((v) => !v)}
         />
+        <div className="infos">
+            <h1>Campanha de Adoção</h1>
+            <h2>Uma seleção de pets que buscam um lar para chamar de seu.</h2>
+        </div>
         <div className="QAdotar-container">
 
             {animals.map((animal) => (

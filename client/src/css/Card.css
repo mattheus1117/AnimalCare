@@ -1,13 +1,32 @@
-/* ====== QAdotar ======= */
+.infos {
+   background-color: #bebebe;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;  
+  height: 22vh;           
+  padding-left: 18%;      
+}
 
-/* Container com Flexbox e gap */
+.infos h1,
+.infos h2 {
+  text-align: left;         
+}
+
+.infos h1{
+  font-size: 3rem;
+}
+
+.infos h2{
+  font-size: 2dvh;
+}
+
 .QAdotar-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 2rem; /* espaçamento horizontal e vertical entre os cards */
-  justify-content: center; /* centraliza os cards */
-  padding: 2rem;
-  max-width: 1700px;
+  gap: 2rem; 
+  justify-content: center; 
+  padding: 4rem;
+  max-width: 1400px;
   margin: 0 auto;
 }
 
@@ -30,12 +49,11 @@
   height: 280px;
   object-fit: cover;
   border-radius: 0.5rem;
-  margin-bottom: 1rem;
 }
 
 /* Informações do QAdotar */
 .QAdotar-info {
-  width: 100%;
+  width: 95%;
   padding: 0 1.2rem;
   display: flex;
   flex-direction: column;
@@ -55,12 +73,12 @@
 
 /* Botão do QAdotar */
 .QAdotar-button {
-  margin-top: 1.5rem;
+  margin-top: 1.2rem;
   color: white;
   background-color: rgb(219, 168, 0);
   border-radius: 1vh;
-  padding: 0.7rem 2.5rem;
-  margin-bottom: 1.5rem;
+  padding: 0.4rem 4rem;
+  margin-bottom: 0.6rem;
   border: 2px solid rgb(196, 111, 0);
   cursor: pointer;
   align-self: center;

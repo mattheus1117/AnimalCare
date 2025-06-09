@@ -28,7 +28,7 @@ export default function Card({ animal, onClick }: CardProps) {
                 <div className="QAdotar-info">
                     <h3>{animal.name}</h3>
                     <p>{animal.location}</p>
-                    <button className="QAdotar-button">Mais Informações</button>
+                    <button className="QAdotar-button">Quero Adotar</button>
                 </div>
             </div>
         );
