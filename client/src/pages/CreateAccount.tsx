@@ -1,3 +1,4 @@
+
 import React from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -10,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 export const CreateAccount = () => {
     const navigate = useNavigate();
     const [showOngForm, setShowOngForm] = React.useState(false);
+    const [showTutorForm, setShowTutorForm] = React.useState(false);
     const [chatVisivel, setChatVisivel] = React.useState(false);
     const [doacaoVisivel, setDoacaoVisivel] = React.useState(false);
 
@@ -27,6 +29,20 @@ export const CreateAccount = () => {
         patio: "",
     });
 
+    const [tutorFormData, setTutorFormData] = React.useState({
+        name: "",
+        cpf: "",
+        birthdate: "",
+        state: "",
+        city: "",
+        zipcode: "",
+        neighborhood: "",
+        patio: "",
+        phone: "",
+        email: "",
+        password: "",
+    });
+
     function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
         const { id, value } = e.target;
         setOngFormData((prev) => ({
@@ -35,8 +51,16 @@ export const CreateAccount = () => {
         }));
     }
 
+    function handleTutorInputChange(e: React.ChangeEvent<HTMLInputElement>) {
+        const { id, value } = e.target;
+        setTutorFormData((prev) => ({
+            ...prev,
+            [id]: value,
+        }));
+    }
+
     function handleTutorClick() {
-        console.log("Criar conta tutor clicado!");
+        setShowTutorForm(true);
     }
 
     function handleOngClick() {
@@ -45,35 +69,48 @@ export const CreateAccount = () => {
 
     function handleBack() {
         setShowOngForm(false);
+        setShowTutorForm(false);
     }
 
     async function handleOngSubmit(event: React.FormEvent) {
         event.preventDefault();
-
         try {
             const response = await api.post("/ong", ongFormData);
             console.log(response.data);
-            // redireciona após sucesso
             navigate("/login");
         } catch (error) {
-            console.error("Erro no login", error);
+            console.error("Erro ao criar conta de ONG", error);
+        }
+    }
+
+    async function handleTutorSubmit(event: React.FormEvent) {
+        event.preventDefault();
+        try {
+            const response = await api.post("/customer", tutorFormData);
+            console.log(response.data);
+            navigate("/login");
+        } catch (error) {
+            console.error("Erro ao criar conta de tutor", error);
         }
     }
 
     return (
         <>
-            <Header onChatClick={() => setChatVisivel((v) => !v)}
-                onDoacaoClick={() => setDoacaoVisivel((v) => !v)} />
-
+            <Header
+                onChatClick={() => setChatVisivel((v) => !v)}
+                onDoacaoClick={() => setDoacaoVisivel((v) => !v)}
+            />
 
             <div className="bg-gray-100 min-h-screen flex flex-col items-center justify-center px-4">
                 <h1 className="text-4xl font-bold text-gray-800 mb-8 text-center">
                     Criação de Conta
                 </h1>
 
-                {!showOngForm ? (
+                {!showOngForm && !showTutorForm ? (
                     <div className="bg-gray-300 p-8 m-4 rounded-2xl shadow-lg w-full max-w-md">
-                        <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">Escolha o tipo de conta</h2>
+                        <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">
+                            Escolha o tipo de conta
+                        </h2>
                         <button
                             type="button"
                             onClick={handleTutorClick}
@@ -95,6 +132,87 @@ export const CreateAccount = () => {
                                 className="text-sm text-indigo-500 hover:underline cursor-pointer"
                             >
                                 Voltar para login
+                            </button>
+                        </div>
+                    </div>
+                ) : showTutorForm ? (
+                    <div className="bg-gray-300 p-12 m-8 rounded-2xl shadow-lg w-full max-w-4xl">
+                        <form onSubmit={handleTutorSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label className="block text-gray-700 mb-2" htmlFor="name">Nome Completo *</label>
+                                <input type="text" id="name" value={tutorFormData.name} onChange={handleInputChange}
+                                    placeholder="Nome"
+                                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+                            </div>
+                            <div>
+                                <label className="block text-gray-700 mb-2" htmlFor="state">Estado *</label>
+                                <input type="text" id="state" value={tutorFormData.state} onChange={handleInputChange}
+                                    placeholder="Estado"
+                                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+                            </div>
+                            <div>
+                                <label className="block text-gray-700 mb-2" htmlFor="cpf">CPF *</label>
+                                <input type="text" id="cpf" value={tutorFormData.cpf} onChange={handleInputChange}
+                                    placeholder="000.000.000-00"
+                                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+                            </div>
+                            <div>
+                                <label className="block text-gray-700 mb-2" htmlFor="zipcode">CEP *</label>
+                                <input type="text" id="zipcode" value={tutorFormData.zipcode} onChange={handleInputChange}
+                                    placeholder="00000-000"
+                                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+                            </div>
+                            <div>
+                                <label className="block text-gray-700 mb-2" htmlFor="birthdate">Data de nascimento *</label>
+                                <input type="text" id="birthdate" value={tutorFormData.birthdate} onChange={handleInputChange}
+                                    placeholder="00/00/0000"
+                                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+                            </div>
+                            <div>
+                                <label className="block text-gray-700 mb-2" htmlFor="city">Cidade *</label>
+                                <input type="text" id="city" value={tutorFormData.city} onChange={handleInputChange}
+                                    placeholder="Cidade"
+                                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+                            </div>
+                            <div>
+                                <label className="block text-gray-700 mb-2" htmlFor="phone">Telefone *</label>
+                                <input type="text" id="phone" value={tutorFormData.phone} onChange={handleInputChange}
+                                    placeholder="(00) 00000-0000"
+                                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+                            </div>
+                            <div>
+                                <label className="block text-gray-700 mb-2" htmlFor="neighborhood">Bairro *</label>
+                                <input type="text" id="neighborhood" value={tutorFormData.neighborhood} onChange={handleInputChange}
+                                    placeholder="Bairro"
+                                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+                            </div>
+                            <div className="md:col-span-2">
+                                <label className="block text-gray-700 mb-2" htmlFor="email">E-mail *</label>
+                                <input type="email" id="email" value={tutorFormData.email} onChange={handleInputChange}
+                                    placeholder="exemplo@exemplo.com"
+                                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+                            </div>
+                            <div className="md:col-span-2">
+                                <label className="block text-gray-700 mb-2" htmlFor="password">Senha *</label>
+                                <input type="password" id="password" value={tutorFormData.password} onChange={handleInputChange}
+                                    placeholder="********"
+                                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+                            </div>
+                            <div className="md:col-span-2">
+                                <label className="block text-gray-700 mb-2" htmlFor="patio">Logradouro *</label>
+                                <input type="text" id="patio" value={tutorFormData.patio} onChange={handleInputChange}
+                                    placeholder="Rua e número da casa"
+                                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+                            </div>
+                            <div className="md:col-span-2">
+                                <button type="submit" className="w-full bg-yellow-500 text-white py-3 rounded-lg mt-6 hover:bg-yellow-600">
+                                    Criar Conta
+                                </button>
+                            </div>
+                        </form>
+                        <div className="flex justify-center mt-4">
+                            <button type="button" onClick={handleBack} className="text-sm text-indigo-500 hover:underline">
+                                Voltar para opções
                             </button>
                         </div>
                     </div>
