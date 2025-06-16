@@ -102,6 +102,8 @@ export const Home = () => {
             </div>
         </div>
 
+         <Link to="/AdicionarAnimais" className="fixed bottom-6 right-6 bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-6 rounded-full shadow-lg transition-all duration-300 z-50"
+        >+ Adicionar Animal</Link>
 
         <Footer />
 

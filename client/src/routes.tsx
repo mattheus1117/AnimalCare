@@ -13,6 +13,7 @@ import { Dica05 } from './pages/Dicas/Dica05';
 import { Dica06 } from './pages/Dicas/Dica06';
 
 // import PrivateRoute from './components/PrivateRoute'
+import { AdicionarAnimais } from "./pages/AdicionarAnimais";
 
 // Footer
 import { Sobre } from './pages/Sobre';
@@ -46,6 +47,8 @@ export const AppRoutes = () => {
                 <Route path='/termos-de-uso' element={<TermosDeUso />} />
 
                 <Route path='*' element={<Navigate to='/' />} />
+
+                <Route path="/AdicionarAnimais" element={<AdicionarAnimais />} />
             </Routes>
         </BrowserRouter>
     );
