@@ -140,67 +140,67 @@ export const CreateAccount = () => {
                         <form onSubmit={handleTutorSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
                                 <label className="block text-gray-700 mb-2" htmlFor="name">Nome Completo *</label>
-                                <input type="text" id="name" value={tutorFormData.name} onChange={handleInputChange}
+                                <input type="text" id="name" value={tutorFormData.name} onChange={handleTutorInputChange}
                                     placeholder="Nome"
                                     className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" />
                             </div>
                             <div>
                                 <label className="block text-gray-700 mb-2" htmlFor="state">Estado *</label>
-                                <input type="text" id="state" value={tutorFormData.state} onChange={handleInputChange}
+                                <input type="text" id="state" value={tutorFormData.state} onChange={handleTutorInputChange}
                                     placeholder="Estado"
                                     className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" />
                             </div>
                             <div>
                                 <label className="block text-gray-700 mb-2" htmlFor="cpf">CPF *</label>
-                                <input type="text" id="cpf" value={tutorFormData.cpf} onChange={handleInputChange}
+                                <input type="text" id="cpf" value={tutorFormData.cpf} onChange={handleTutorInputChange}
                                     placeholder="000.000.000-00"
                                     className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" />
                             </div>
                             <div>
                                 <label className="block text-gray-700 mb-2" htmlFor="zipcode">CEP *</label>
-                                <input type="text" id="zipcode" value={tutorFormData.zipcode} onChange={handleInputChange}
+                                <input type="text" id="zipcode" value={tutorFormData.zipcode} onChange={handleTutorInputChange}
                                     placeholder="00000-000"
                                     className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" />
                             </div>
                             <div>
                                 <label className="block text-gray-700 mb-2" htmlFor="birthdate">Data de nascimento *</label>
-                                <input type="text" id="birthdate" value={tutorFormData.birthdate} onChange={handleInputChange}
+                                <input type="text" id="birthdate" value={tutorFormData.birthdate} onChange={handleTutorInputChange}
                                     placeholder="00/00/0000"
                                     className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" />
                             </div>
                             <div>
                                 <label className="block text-gray-700 mb-2" htmlFor="city">Cidade *</label>
-                                <input type="text" id="city" value={tutorFormData.city} onChange={handleInputChange}
+                                <input type="text" id="city" value={tutorFormData.city} onChange={handleTutorInputChange}
                                     placeholder="Cidade"
                                     className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" />
                             </div>
                             <div>
                                 <label className="block text-gray-700 mb-2" htmlFor="phone">Telefone *</label>
-                                <input type="text" id="phone" value={tutorFormData.phone} onChange={handleInputChange}
+                                <input type="text" id="phone" value={tutorFormData.phone} onChange={handleTutorInputChange}
                                     placeholder="(00) 00000-0000"
                                     className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" />
                             </div>
                             <div>
                                 <label className="block text-gray-700 mb-2" htmlFor="neighborhood">Bairro *</label>
-                                <input type="text" id="neighborhood" value={tutorFormData.neighborhood} onChange={handleInputChange}
+                                <input type="text" id="neighborhood" value={tutorFormData.neighborhood} onChange={handleTutorInputChange}
                                     placeholder="Bairro"
                                     className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" />
                             </div>
                             <div className="md:col-span-2">
                                 <label className="block text-gray-700 mb-2" htmlFor="email">E-mail *</label>
-                                <input type="email" id="email" value={tutorFormData.email} onChange={handleInputChange}
+                                <input type="email" id="email" value={tutorFormData.email} onChange={handleTutorInputChange}
                                     placeholder="exemplo@exemplo.com"
                                     className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" />
                             </div>
                             <div className="md:col-span-2">
                                 <label className="block text-gray-700 mb-2" htmlFor="password">Senha *</label>
-                                <input type="password" id="password" value={tutorFormData.password} onChange={handleInputChange}
+                                <input type="password" id="password" value={tutorFormData.password} onChange={handleTutorInputChange}
                                     placeholder="********"
                                     className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" />
                             </div>
                             <div className="md:col-span-2">
                                 <label className="block text-gray-700 mb-2" htmlFor="patio">Logradouro *</label>
-                                <input type="text" id="patio" value={tutorFormData.patio} onChange={handleInputChange}
+                                <input type="text" id="patio" value={tutorFormData.patio} onChange={handleTutorInputChange}
                                     placeholder="Rua e número da casa"
                                     className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" />
                             </div>

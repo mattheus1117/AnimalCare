@@ -108,7 +108,7 @@ export const AdicionarAnimais = () => {
                         </div>
                         <div className="md:col-span-2">
                             <label className="block text-gray-700 mb-2" htmlFor="img">Link da Imagem *</label>
-                            <input type="text" id="img" value={petFormData.img} onChange={handleInputChange}
+                            <input type="file" id="img" value={petFormData.img} onChange={handleInputChange}
                                 placeholder="Link da imagem do animal em conversão picture64"
                                 className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" />
                         </div>
