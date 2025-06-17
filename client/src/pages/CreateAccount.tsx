@@ -32,13 +32,13 @@ export const CreateAccount = () => {
     const [tutorFormData, setTutorFormData] = React.useState({
         name: "",
         cpf: "",
-        birthdate: "",
+        dateOfBirth: "",
         state: "",
         city: "",
         zipcode: "",
         neighborhood: "",
         patio: "",
-        phone: "",
+        telephone: "",
         email: "",
         password: "",
     });
@@ -163,8 +163,8 @@ export const CreateAccount = () => {
                                     className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" />
                             </div>
                             <div>
-                                <label className="block text-gray-700 mb-2" htmlFor="birthdate">Data de nascimento *</label>
-                                <input type="text" id="birthdate" value={tutorFormData.birthdate} onChange={handleTutorInputChange}
+                                <label className="block text-gray-700 mb-2" htmlFor="dateOfBirth">Data de nascimento *</label>
+                                <input type="text" id="dateOfBirth" value={tutorFormData.dateOfBirth} onChange={handleTutorInputChange}
                                     placeholder="00/00/0000"
                                     className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" />
                             </div>
@@ -175,8 +175,8 @@ export const CreateAccount = () => {
                                     className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" />
                             </div>
                             <div>
-                                <label className="block text-gray-700 mb-2" htmlFor="phone">Telefone *</label>
-                                <input type="text" id="phone" value={tutorFormData.phone} onChange={handleTutorInputChange}
+                                <label className="block text-gray-700 mb-2" htmlFor="telephone">Telefone *</label>
+                                <input type="text" id="telephone" value={tutorFormData.telephone} onChange={handleTutorInputChange}
                                     placeholder="(00) 00000-0000"
                                     className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" />
                             </div>

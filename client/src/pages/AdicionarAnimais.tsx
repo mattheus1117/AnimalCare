@@ -25,7 +25,7 @@ export const AdicionarAnimais = () => {
         about: "",
     });
 
-    function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
+    function handlePetInputChange(e: React.ChangeEvent<HTMLInputElement>) {
         const { id, value } = e.target;
         setPetFormData((prev) => ({
             ...prev,
@@ -40,7 +40,7 @@ export const AdicionarAnimais = () => {
             console.log(response.data);
             navigate("/login");
         } catch (error) {
-            console.error("Erro ao criar conta de ONG", error);
+            console.error("Erro ao cadastrar novo animal", error);
         }
     }
 
@@ -60,64 +60,65 @@ export const AdicionarAnimais = () => {
                     <form onSubmit={handlePetSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
                             <label className="block text-gray-700 mb-2" htmlFor="Name">Nome do animal *</label>
-                            <input type="text" id="Name" value={petFormData.Name} onChange={handleInputChange}
+                            <input type="text" id="Name" value={petFormData.Name} onChange={handlePetInputChange}
                                 placeholder="Nome"
                                 className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" />
                         </div>
                         <div>
                             <label className="block text-gray-700 mb-2" htmlFor="species">Espécie *</label>
-                            <input type="text" id="species" value={petFormData.species} onChange={handleInputChange}
+                            <input type="text" id="species" value={petFormData.species} onChange={handlePetInputChange}
                                 placeholder="Ex: Cachorro, Gato, Pássaro"
                                 className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" />
                         </div>
                         <div>
                             <label className="block text-gray-700 mb-2" htmlFor="old">Idade *</label>
-                            <input type="text" id="old" value={petFormData.old} onChange={handleInputChange}
+                            <input type="text" id="old" value={petFormData.old} onChange={handlePetInputChange}
                                 placeholder="Ex: 2 anos"
                                 className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" />
                         </div>
                         <div>
                             <label className="block text-gray-700 mb-2" htmlFor="race">Raça *</label>
-                            <input type="text" id="race" value={petFormData.race} onChange={handleInputChange}
+                            <input type="text" id="race" value={petFormData.race} onChange={handlePetInputChange}
                                 placeholder="Raça do animal"
                                 className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" />
                         </div>
                         <div>
                             <label className="block text-gray-700 mb-2" htmlFor="sex">Sexo *</label>
-                            <input type="text" id="sex" value={petFormData.sex} onChange={handleInputChange}
+                            <input type="text" id="sex" value={petFormData.sex} onChange={handlePetInputChange}
                                 placeholder="Sexo do animal"
                                 className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" />
                         </div>
                         <div>
                             <label className="block text-gray-700 mb-2" htmlFor="weight">Peso *</label>
-                            <input type="text" id="weight" value={petFormData.weight} onChange={handleInputChange}
+                            <input type="text" id="weight" value={petFormData.weight} onChange={handlePetInputChange}
                                 placeholder="Peso do animal"
                                 className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" />
                         </div>
                         <div>
                             <label className="block text-gray-700 mb-2" htmlFor="size">Porte *</label>
-                            <input type="text" id="size" value={petFormData.size} onChange={handleInputChange}
+                            <input type="text" id="size" value={petFormData.size} onChange={handlePetInputChange}
                                 placeholder="Ex: Pequeno, Médio, Grande"
                                 className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" />
                         </div>
                         <div>
                             <label className="block text-gray-700 mb-2" htmlFor="location">Local *</label>
-                            <input type="text" id="location" value={petFormData.location} onChange={handleInputChange}
+                            <input type="text" id="location" value={petFormData.location} onChange={handlePetInputChange}
                                 placeholder="Cidade, Estado"
                                 className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" />
                         </div>
                         <div className="md:col-span-2">
                             <label className="block text-gray-700 mb-2" htmlFor="img">Link da Imagem *</label>
-                            <input type="file" id="img" value={petFormData.img} onChange={handleInputChange}
+                            <input type="file" id="img" value={petFormData.img} onChange={handlePetInputChange}
                                 placeholder="Link da imagem do animal em conversão picture64"
                                 className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" />
                         </div>
                         <div className="md:col-span-2">
                             <label className="block text-gray-700 mb-2" htmlFor="about">Sobre o Pet *</label>
-                            <input type="text" id="about" value={petFormData.about} onChange={handleInputChange}
+                            <input type="text" id="about" value={petFormData.about} onChange={handlePetInputChange}
                                 placeholder="Dócil, brincalhão, gosta de passear..."
                                 className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" />
                         </div>
+                        
                         <div className="md:col-span-2">
                             <button
                                 type="submit"
