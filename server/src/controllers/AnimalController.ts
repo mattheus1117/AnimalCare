@@ -1,21 +1,6 @@
 import { FastifyRequest, FastifyReply } from 'fastify';
 import { AnimalService } from '../services/AnimalService'
 
-interface CreateAnimalProps {
-    idUser: string;
-    pictureBase64: string;
-    name: string;
-    age: number;
-    gender: string;
-    size: number;
-    kind: string;
-    race: string;
-    status: string;
-    weight?: number;
-    location?: string;
-    description?: string;
-}
-
 class AnimalController {
     async handleListAnimals(request: FastifyRequest, reply: FastifyReply){
 
@@ -27,9 +12,8 @@ class AnimalController {
 
     async handleCreateAnimal(request: FastifyRequest, reply: FastifyReply){
 
-        const { 
+        const {
             idUser,
-            pictureBase64,
             name,
             age,
             gender,
@@ -39,22 +23,28 @@ class AnimalController {
             status,
             weight,
             location,
-            description } = request.body as CreateAnimalProps;
+            description,
+            animalPicture
+        } = request.body as any;
+
+        if(!animalPicture || !name || !age || !gender || !size || !kind || !race){
+            throw new Error("Preencha todos os campos.")
+        }
 
         const animalService = new AnimalService();
-        const animal = await animalService.createAnimal({ 
-            idUser,
-            pictureBase64,
-            name,
-            age,
-            gender,
-            size,
-            kind,
-            race,
-            status,
-            weight,
-            location,
-            description });
+        const animal = await animalService.createAnimal(
+            idUser.value,
+            animalPicture,
+            name.value,
+            Number(age.value),
+            gender.value,
+            Number(size.value),
+            kind.value,
+            race.value,
+            status.value,
+            Number(weight.value),
+            location.value,
+            description.value );
 
         reply.send(animal);
     }

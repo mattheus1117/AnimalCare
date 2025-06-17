@@ -12,7 +12,7 @@ import ".././css/Card.css"
 import ".././css/style.css"
 
 interface Animal {
-    pictureBase64: string;
+    imageUrl: string;
     name: string;
     age: number;
     gender: string;

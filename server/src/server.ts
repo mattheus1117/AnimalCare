@@ -1,6 +1,7 @@
 import Fastify from 'fastify';
 import cookie from '@fastify/cookie';
 import cors from '@fastify/cors';
+import multipart from '@fastify/multipart';
 import { routes } from './routes';
 import dotenv from "dotenv";
 
@@ -12,6 +13,13 @@ dotenv.config();
 // cookies
 app.register(cookie, {
   secret: process.env.COOKIE_SECRET || 'default_cookie_secret', // se quiser usar cookies assinados
+});
+
+app.register(multipart, {
+  attachFieldsToBody: true, // Faz com que os campos fiquem acessíveis via request.body
+  limits: {
+    fileSize: 10 * 1024 * 1024, // Limite de 10MB por arquivo
+  },
 });
 
 // Tratamento de exceções

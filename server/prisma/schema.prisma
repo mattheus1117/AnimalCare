@@ -37,7 +37,7 @@ model Customer {
 model Animal {
     id String @id @default(auto()) @map("_id") @db.ObjectId
     idUser String
-    pictureBase64 String
+    imageUrl String
     name String
     age Int
     gender String

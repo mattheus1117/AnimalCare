@@ -1,7 +1,7 @@
 import './AnimalPopup.css';
 
 interface Animal {
-    pictureBase64: string;
+    imageUrl: string;
     name: string;
     age: number;
     gender: string;
@@ -24,7 +24,7 @@ export default function AnimalPopup({ animal, onClose }: AnimalPopupProps) {
     <div className="animal-popup-overlay">
       <div className="animal-popup">
         <div className="animal-popup-left">
-          <img src={`data:image/jpeg;charset=utf-8;base64,${animal.pictureBase64}`} alt={animal.name} />
+          <img src={animal.imageUrl} alt={animal.name} />
         </div>
         <div className="animal-popup-right">
           <button className="close-btn" onClick={onClose}>×</button>

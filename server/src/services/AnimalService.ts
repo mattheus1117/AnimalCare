@@ -1,8 +1,10 @@
 import prismaClient from "../prisma";
+import { supabase } from '../supabase';
+import { randomUUID } from 'crypto';
 
 interface CreateAnimalProps {
     idUser: string;
-    pictureBase64: string;
+    animalPicture: any;
     name: string;
     age: number;
     gender: string;
@@ -24,13 +26,36 @@ interface DeleteAnimalProps {
 }
 
 class AnimalService {
+
     async listAnimals() {
         const animals = await prismaClient.animal.findMany();
 
         return animals;
     };
 
-    async createAnimal({ idUser, pictureBase64, name, age, gender, size, kind, race, status, weight, location, description }: CreateAnimalProps) {
+    async createAnimal(idUser: string, animalPicture: any, name: string, age: number, gender: string, size: number, kind: string, race: string, status: string, weight: number, location: string, description: string) {
+        
+        const fileBuffer = await animalPicture.toBuffer();
+        const fileExtension = animalPicture.filename.split('.').pop();
+        const fileName = `${randomUUID()}.${fileExtension}`;
+
+        const { error } = await supabase.storage
+            .from('animals')
+            .upload(fileName, fileBuffer, {
+            contentType: animalPicture.mimetype,
+        });
+
+        if (error) {
+            console.log(error);
+            throw new Error("Erro ao fazer upload da imagem.")
+        }
+
+        // Gerar URL pública
+        const { data } = supabase.storage
+            .from('animals')
+            .getPublicUrl(fileName);
+
+        const imageUrl = data.publicUrl;
 
         if(idUser){
             const user = await prismaClient.customer.findFirst({
@@ -47,14 +72,10 @@ class AnimalService {
             throw new Error("Usuário não encontrado.")
         }
 
-        if(!pictureBase64 || !name || !age || !gender || !size || !kind || !race){
-            throw new Error("Preencha todos os campos.")
-        }
-
         const animal = await prismaClient.animal.create({
             data: {
                 idUser,
-                pictureBase64,
+                imageUrl,
                 name,
                 age,
                 gender,

@@ -2,7 +2,7 @@ import ".././css/style.css"
 import ".././css/Card.css"
 
 interface Animal {
-    pictureBase64: string;
+    imageUrl: string;
     name: string;
     age: number;
     gender: string;
@@ -24,7 +24,7 @@ export default function Card({ animal, onClick }: CardProps) {
     if (animal.status == 'PD') {
         return (
             <div className="QAdotar" onClick={onClick}>
-                <img src={`data:image/jpeg;charset=utf-8;base64,${animal.pictureBase64}`} alt={animal.name} className="QAdotar-img" />
+                <img src={animal.imageUrl} alt={animal.name} className="QAdotar-img" />
                 <div className="QAdotar-info">
                     <h3>{animal.name}</h3>
                     <p>{animal.location}</p>
