@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { useAuth } from './AuthContext';
 
 import ".././css/style.css"
 import ".././css/Header.css"
@@ -9,6 +10,7 @@ interface NavbarProps {
 }
 
 export default function Navbar({ onChatClick, onDoacaoClick }: NavbarProps) {
+    const { isAuthenticated } = useAuth();
     return (
         <nav className="nav h-24">
             <div className="nav-left">
@@ -31,9 +33,16 @@ export default function Navbar({ onChatClick, onDoacaoClick }: NavbarProps) {
                 <Link to='/adotar' className="Qadotar">
                     Quero Adotar
                 </Link>
-                <Link to='/login' className="Entrar">
-                    Entrar
-                </Link>
+
+                { isAuthenticated ? (
+                    <Link to='/perfil' className="Perfil">
+                        Perfil
+                    </Link>
+                ) : (
+                    <Link to='/login' className="Entrar">
+                        Entrar
+                    </Link>
+                )}
             </div>
         </nav>
     );
