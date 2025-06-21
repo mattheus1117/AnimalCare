@@ -33,18 +33,18 @@ class AnimalController {
 
         const animalService = new AnimalService();
         const animal = await animalService.createAnimal(
-            idUser.value,
+            idUser,
             animalPicture,
-            name.value,
-            Number(age.value),
-            gender.value,
-            Number(size.value),
-            kind.value,
-            race.value,
-            status.value,
-            Number(weight.value),
-            location.value,
-            description.value );
+            name,
+            Number(age),
+            gender,
+            Number(size),
+            kind,
+            race,
+            status,
+            Number(weight),
+            location,
+            description );
 
         reply.send(animal);
     }

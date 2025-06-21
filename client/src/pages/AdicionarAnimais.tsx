@@ -5,6 +5,8 @@ import Chat from "../components/Chat/Chat";
 import DoacaoPopup from "../components/Doacao/Doacao";
 import PerfilPopup from '../components/PerfilPopup';
 
+import "../css/AdicionarAnimais.css";
+
 import { api } from "../services/api";
 import { useNavigate } from "react-router-dom";
 
@@ -15,16 +17,16 @@ export const AdicionarAnimais = () => {
     const [perfilVisivel, setPerfilVisivel] = React.useState(false);
 
     const [petFormData, setPetFormData] = React.useState({
-        Name: "",
-        old: "",
-        sex: "",
+        name: "",
+        age: "",
+        gender: "",
         size: "",
-        species: "",
-        img: "",
+        kind: "",
+        animalPicture: "",
         race: "",
         weight: "",
         location: "",
-        about: "",
+        description: "",
     });
 
     function handlePetInputChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -38,9 +40,9 @@ export const AdicionarAnimais = () => {
     async function handlePetSubmit(event: React.FormEvent) {
         event.preventDefault();
         try {
-            const response = await api.post("/adicionarAnimais", petFormData);
+            const response = await api.post("/animal", petFormData);
             console.log(response.data);
-            navigate("/login");
+            navigate("/");
         } catch (error) {
             console.error("Erro ao cadastrar novo animal", error);
         }
@@ -55,27 +57,28 @@ export const AdicionarAnimais = () => {
             />
 
             <div className="bg-gray-100 min-h-screen flex flex-col items-center justify-center px-4">
-                <h1 className="text-4xl font-bold text-gray-800 mb-8 text-center">
+                <h1 className="titleAnimal">
                     Cadastrar Animal
                 </h1>
-
-                <div className="bg-gray-300 p-12 m-8 rounded-2xl shadow-lg w-full max-w-5xl">
+                
+                <div className="createAnimal-box">
+                   <div className="box">
                     <form onSubmit={handlePetSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <label className="block text-gray-700 mb-2" htmlFor="Name">Nome do animal *</label>
-                            <input type="text" id="Name" value={petFormData.Name} onChange={handlePetInputChange}
+                            <label className="block text-gray-700 mb-2" htmlFor="name">Nome do animal *</label>
+                            <input type="text" id="name" value={petFormData.name} onChange={handlePetInputChange}
                                 placeholder="Nome"
                                 className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" />
                         </div>
                         <div>
-                            <label className="block text-gray-700 mb-2" htmlFor="species">Espécie *</label>
-                            <input type="text" id="species" value={petFormData.species} onChange={handlePetInputChange}
+                            <label className="block text-gray-700 mb-2" htmlFor="kind">Espécie *</label>
+                            <input type="text" id="kind" value={petFormData.kind} onChange={handlePetInputChange}
                                 placeholder="Ex: Cachorro, Gato, Pássaro"
                                 className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" />
                         </div>
                         <div>
-                            <label className="block text-gray-700 mb-2" htmlFor="old">Idade *</label>
-                            <input type="text" id="old" value={petFormData.old} onChange={handlePetInputChange}
+                            <label className="block text-gray-700 mb-2" htmlFor="age">Idade *</label>
+                            <input type="text" id="age" value={petFormData.age} onChange={handlePetInputChange}
                                 placeholder="Ex: 2 anos"
                                 className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" />
                         </div>
@@ -86,8 +89,8 @@ export const AdicionarAnimais = () => {
                                 className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" />
                         </div>
                         <div>
-                            <label className="block text-gray-700 mb-2" htmlFor="sex">Sexo *</label>
-                            <input type="text" id="sex" value={petFormData.sex} onChange={handlePetInputChange}
+                            <label className="block text-gray-700 mb-2" htmlFor="gender">Sexo *</label>
+                            <input type="text" id="gender" value={petFormData.gender} onChange={handlePetInputChange}
                                 placeholder="Sexo do animal"
                                 className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" />
                         </div>
@@ -110,14 +113,14 @@ export const AdicionarAnimais = () => {
                                 className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" />
                         </div>
                         <div className="md:col-span-2">
-                            <label className="block text-gray-700 mb-2" htmlFor="img">Link da Imagem *</label>
-                            <input type="file" id="img" value={petFormData.img} onChange={handlePetInputChange}
+                            <label className="block text-gray-700 mb-2" htmlFor="animalPicture">Link da Imagem *</label>
+                            <input type="file" id="animalPicture" value={petFormData.animalPicture} onChange={handlePetInputChange}
                                 placeholder="Link da imagem do animal em conversão picture64"
                                 className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" />
                         </div>
                         <div className="md:col-span-2">
-                            <label className="block text-gray-700 mb-2" htmlFor="about">Sobre o Pet *</label>
-                            <input type="text" id="about" value={petFormData.about} onChange={handlePetInputChange}
+                            <label className="block text-gray-700 mb-2" htmlFor="description">Sobre o Pet *</label>
+                            <input type="text" id="description" value={petFormData.description} onChange={handlePetInputChange}
                                 placeholder="Dócil, brincalhão, gosta de passear..."
                                 className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" />
                         </div>
@@ -140,13 +143,16 @@ export const AdicionarAnimais = () => {
                             Voltar
                         </button>
                     </div>
+                    </div>
                 </div>
             </div>
+            
 
             <Footer />
 
             {chatVisivel && <Chat onClose={() => setChatVisivel(false)} />}
             {doacaoVisivel && <DoacaoPopup onClose={() => setDoacaoVisivel(false)} />}
+            {perfilVisivel && <PerfilPopup onClose={() => setPerfilVisivel(false)} />}
         </>
     );
 };
