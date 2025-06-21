@@ -63,7 +63,17 @@
     /* border: 2px solid black; */
 }
 
+.Perfil {
+    margin-left: 2rem;
+    background-color: black;
+    color: white;
+}
+
 .Entrar:hover {
+    background-color: #555;
+}
+
+.Perfil:hover {
     background-color: #555;
 }
 

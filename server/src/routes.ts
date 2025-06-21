@@ -62,4 +62,8 @@ export async function routes(fastify: FastifyInstance, options: FastifyPluginOpt
     fastify.post("/refresh", async (request: FastifyRequest, reply: FastifyReply) => {
         return new AuthController().handleRefresh(request, reply);
     });
+
+    fastify.get("/me", async (request: FastifyRequest, reply: FastifyReply) => {
+        return new AuthController().handleMe(request, reply);
+    });
 }

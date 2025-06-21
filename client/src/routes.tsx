@@ -19,6 +19,7 @@ import { AdicionarAnimais } from "./pages/AdicionarAnimais";
 import { Sobre } from './pages/Sobre';
 import { Contato } from './pages/Contato';
 import { TermosDeUso } from './pages/TermosDeUso';
+import PerfilPopup from './components/PerfilPopup';
 
 export const AppRoutes = () => {
     return (
@@ -38,7 +39,7 @@ export const AppRoutes = () => {
                 <Route path='/adotar' element={
                     <QueroAdotar />
                 } />
-
+                
                 <Route path='/login' element={<Login />} />
                 <Route path='/create-account' element={<CreateAccount />} />
 
@@ -50,6 +51,7 @@ export const AppRoutes = () => {
 
                 <Route path="/AdicionarAnimais" element={<AdicionarAnimais />} />
             </Routes>
+
         </BrowserRouter>
     );
 }

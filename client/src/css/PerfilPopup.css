@@ -1,0 +1,55 @@
+.perfil-popup-overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: auto;
+  height: auto;
+  background-color: transparent;
+  padding: 1rem;
+  padding-top: 5.5rem;
+}
+
+.perfil-popup {
+  background: white;
+  padding: 2rem;
+  border-radius: 1rem;
+  width: 320px;
+  height: 40vh;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow-y: auto;
+}
+
+
+.perfil-popup h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.fechar-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background-color: #9ca3af;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+}
+
+.perfil-popup-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.sair-btn {
+  background-color: #ef4444;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+}

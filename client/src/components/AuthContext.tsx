@@ -20,10 +20,29 @@ interface TokenPayload {
   role: 'customer' | 'ong';
 }
 
+interface Usuario {
+  name: string;
+  cpf: string;
+  email: string;
+  city: string;
+}
+
+interface AuthContextType {
+  isAuthenticated: boolean;
+  login: (token: string) => void;
+  logout: () => void;
+  user: Usuario | null;
+  getWithProactiveAuth: <T = any>(
+    url: string,
+    config?: AxiosRequestConfig
+  ) => Promise<AxiosResponse<T>>;
+}
+
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [user, setUser] = useState<Usuario | null>(null);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -32,12 +51,25 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     }
   }, []);
 
-  const login = (accessToken: string) => {
+  const login = async (accessToken: string) => {
     const decoded = jwtDecode<TokenPayload>(accessToken);
     localStorage.setItem("token", accessToken);
     localStorage.setItem('accessTokenExp', String(decoded.exp));
     localStorage.setItem('userRole', decoded.role);
     setIsAuthenticated(true);
+
+    try {
+      const userResponse = await api.get("/me", {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+      setUser(userResponse.data);
+    } catch (error) {
+      console.error("Erro ao buscar dados do usuário:", error);
+    }
+
+
   };
 
   const logout = () => {
@@ -45,6 +77,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     localStorage.removeItem("accessTokenExp");
     localStorage.removeItem("userRole");
     setIsAuthenticated(false);
+    setUser(null);
   };
 
   function isTokenExpiringSoon(token: string): boolean {
@@ -98,7 +131,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   }
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, login, logout, getWithProactiveAuth }}>
+    <AuthContext.Provider value={{ isAuthenticated, login, logout, user, getWithProactiveAuth }}>
       {children}
     </AuthContext.Provider>
   );
