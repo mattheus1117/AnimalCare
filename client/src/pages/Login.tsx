@@ -28,10 +28,19 @@ export const Login = () => {
             login(response.data);
 
             navigate("/"); //TODO: fazer o usuario voltar da pagina que estava
+        } catch (errCustomer) {
+            try {
+            const response = await api.post("/loginOng", { email, password });
+            console.log("Ok!");
+
+            login(response.data);
+
+            navigate("/"); //TODO: fazer o usuario voltar da pagina que estava
         } catch (error) {
             console.error("Erro no login", error);
         }
     }
+}
 
     return (
         <>
