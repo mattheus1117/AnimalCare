@@ -8,6 +8,8 @@ import { useAuth } from '../components/AuthContext';
 import { Link, useNavigate } from "react-router-dom";
 import { api } from "../services/api";
 
+import "../css/login.css"
+
 export const Login = () => {
     const navigate = useNavigate();
     const [email, setEmail] = React.useState("");
@@ -39,10 +41,11 @@ export const Login = () => {
             />
 
             <div className="bg-gray-100 min-h-screen flex flex-col items-center justify-center px-4">
-                <h1 className="text-4xl font-bold text-gray-800 mb-8 text-center">
+                <h1 className="titleLogin">
                     Boas-vindas ao AnimalCare
                 </h1>
-                <div className="bg-gray-300 p-8 m-4 rounded-2xl shadow-lg w-full max-w-sm">
+                <div className="bg-gray-300 px-10 py-8 m-4 rounded-2xl shadow-lg w-full max-w-sm space-y-4">
+                    <div className="login-box">
                     <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">Entrar</h2>
                     <form onSubmit={handleUserLogin}>
                         <div className="mb-4">
@@ -53,7 +56,7 @@ export const Login = () => {
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 placeholder="seuemail@exemplo.com"
-                                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                                className="w-full px-10 py-2 border border-gray-400 rounded-xl focus:outline-none focus:ring-2 focus:ring-yellow-400"
                             />
                         </div>
                         <div className="mb-4">
@@ -64,27 +67,28 @@ export const Login = () => {
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 placeholder="********"
-                                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400"
                             />
                         </div>
                         <div className="flex justify-end mb-4">
-                            <a href="#" className="text-sm text-indigo-500 hover:underline">Esqueci minha senha</a>
+                            <a href="#" className="text-sm text-yellow-500 hover:underline">Esqueci minha senha</a>
                         </div>
                         <button
                             type="submit"
-                            className="w-full bg-indigo-500 text-white py-2 rounded-lg hover:bg-indigo-600 transition-colors mb-4 cursor-pointer"
+                            className="w-full bg-yellow-500 text-white py-2 rounded-lg hover:bg-yellow-600 transition-colors mb-4 cursor-pointer"
                         >
                             Login
                         </button>
                         <div className="flex justify-center">
                             <Link
                                 to="/create-account"
-                                className="text-sm text-indigo-500 hover:underline cursor-pointer"
+                                className="text-sm text-yellow-500 hover:underline cursor-pointer"
                             >
                                 Crie uma conta
                             </Link>
                         </div>
                     </form>
+                    </div>
                 </div>
             </div>
 
