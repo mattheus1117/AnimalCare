@@ -18,6 +18,7 @@ export const AdicionarAnimais = () => {
 
     const [petFormData, setPetFormData] = React.useState({
         name: "",
+        idUser: "",
         age: "",
         gender: "",
         size: "",
@@ -39,13 +40,43 @@ export const AdicionarAnimais = () => {
 
     async function handlePetSubmit(event: React.FormEvent) {
         event.preventDefault();
-        try {
-            const response = await api.post("/animal", petFormData);
+
+        const formData = new FormData();
+
+        formData.append("idUser", petFormData.idUser); // Assuming a default user ID for now
+        formData.append("name", petFormData.name);
+        formData.append("age", petFormData.age);
+        formData.append("gender", petFormData.gender);
+        formData.append("size", petFormData.size);
+        formData.append("kind", petFormData.kind);
+        formData.append("race", petFormData.race);
+        formData.append("weight", petFormData.weight);
+        formData.append("location", petFormData.location);
+        formData.append("description", petFormData.description);
+
+        const animalPictureFile = document.getElementById("animalPicture") as HTMLInputElement;
+        if (animalPictureFile.files && animalPictureFile.files[0]) {
+            formData.append("animalPicture", animalPictureFile.files[0]);
+        }
+
+         try {
+            const response = await api.post("/animal", formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+            });
             console.log(response.data);
-            navigate("/");
         } catch (error) {
             console.error("Erro ao cadastrar novo animal", error);
         }
+
+        // try {
+        //     const response = await api.post("/animal", petFormData);
+        //     console.log(response.data);
+        //     navigate("/");
+        // } catch (error) {
+        //     console.error("Erro ao cadastrar novo animal", error);
+        // }
     }
 
     return (
@@ -112,7 +143,13 @@ export const AdicionarAnimais = () => {
                                 placeholder="Cidade, Estado"
                                 className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" />
                         </div>
-                        <div className="md:col-span-2">
+                        <div>
+                            <label className="block text-gray-700 mb-2" htmlFor="idUser">Id do Usuario *</label>
+                            <input type="text" id="idUser" value={petFormData.idUser} onChange={handlePetInputChange}
+                                placeholder="Id do usuário que está cadastrando o animal"
+                                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+                        </div>
+                        <div>
                             <label className="block text-gray-700 mb-2" htmlFor="animalPicture">Link da Imagem *</label>
                             <input type="file" id="animalPicture" value={petFormData.animalPicture} onChange={handlePetInputChange}
                                 placeholder="Link da imagem do animal em conversão picture64"

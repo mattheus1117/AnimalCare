@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useAuth } from './AuthContext';
 
 import ".././css/style.css"
@@ -12,7 +12,6 @@ interface NavbarProps {
 
 export default function Navbar({ onChatClick, onDoacaoClick, onPerfilClick }: NavbarProps) {
     const { isAuthenticated } = useAuth();
-    const Navigate = useNavigate();
     return (
         <nav className="nav h-24">
             <div className="nav-left">

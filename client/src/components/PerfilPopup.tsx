@@ -1,4 +1,3 @@
-import React from "react";
 import { useAuth } from "./AuthContext";
 
 import "../css/PerfilPopup.css"; // Crie ou adicione estilo aqui conforme desejar
