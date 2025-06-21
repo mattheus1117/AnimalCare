@@ -3,6 +3,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Chat from "../components/Chat/Chat";
 import DoacaoPopup from "../components/Doacao/Doacao";
+import PerfilPopup from '../components/PerfilPopup';
 
 import { api } from "../services/api";
 import { useNavigate } from "react-router-dom";
@@ -11,6 +12,7 @@ export const AdicionarAnimais = () => {
     const navigate = useNavigate();
     const [chatVisivel, setChatVisivel] = React.useState(false);
     const [doacaoVisivel, setDoacaoVisivel] = React.useState(false);
+    const [perfilVisivel, setPerfilVisivel] = React.useState(false);
 
     const [petFormData, setPetFormData] = React.useState({
         Name: "",
@@ -49,6 +51,7 @@ export const AdicionarAnimais = () => {
             <Header
                 onChatClick={() => setChatVisivel((v) => !v)}
                 onDoacaoClick={() => setDoacaoVisivel((v) => !v)}
+                onPerfilClick={() => setPerfilVisivel((v) => !v)}
             />
 
             <div className="bg-gray-100 min-h-screen flex flex-col items-center justify-center px-4">

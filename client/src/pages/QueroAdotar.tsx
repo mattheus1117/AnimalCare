@@ -6,6 +6,7 @@ import Chat from "../components/Chat/Chat";
 import Card from '../components/Card';
 import AnimalPopup from '../components/AnimalPopup/AnimalPopup';
 import DoacaoPopup from "../components/Doacao/Doacao";
+import PerfilPopup from '../components/PerfilPopup';
 
 import { useAuth } from '../components/AuthContext';
 import ".././css/Card.css"
@@ -29,6 +30,8 @@ export const QueroAdotar = () => {
     const [animalSelecionado, setAnimalSelecionado] = React.useState<Animal | null>(null);
     const [chatVisivel, setChatVisivel] = React.useState(false);
     const [doacaoVisivel, setDoacaoVisivel] = React.useState(false);
+    const [perfilVisivel, setPerfilVisivel] = React.useState(false);
+    
 
     const [animals, setAnimals] = React.useState<Animal[]>([]);
 
@@ -48,6 +51,7 @@ export const QueroAdotar = () => {
         <Header
             onChatClick={() => setChatVisivel((v) => !v)}
             onDoacaoClick={() => setDoacaoVisivel((v) => !v)}
+            onPerfilClick={() => setPerfilVisivel((v) => !v)}
         />
         <div className="infos">
             <h1>Campanha de Adoção</h1>
@@ -64,6 +68,7 @@ export const QueroAdotar = () => {
 
         {chatVisivel && <Chat onClose={() => setChatVisivel(false)} />}
         {doacaoVisivel && <DoacaoPopup onClose={() => setDoacaoVisivel(false)} />}
+        {perfilVisivel && <PerfilPopup onClose={() => setPerfilVisivel(false)} />}
         {animalSelecionado && (<AnimalPopup animal={animalSelecionado} onClose={() => setAnimalSelecionado(null)} />)}
     </>
 }
