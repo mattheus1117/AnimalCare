@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Chat from "../components/Chat/Chat";
@@ -9,6 +9,36 @@ import "../css/AdicionarAnimais.css";
 
 import { api } from "../services/api";
 import { useNavigate } from "react-router-dom";
+
+const States = [
+    { nome: 'Acre', sigla: 'AC' },
+    { nome: 'Alagoas', sigla: 'AL' },
+    { nome: 'Amapá', sigla: 'AP' },
+    { nome: 'Amazonas', sigla: 'AM' },
+    { nome: 'Bahia', sigla: 'BA' },
+    { nome: 'Ceará', sigla: 'CE' },
+    { nome: 'Distrito Federal', sigla: 'DF' },
+    { nome: 'Espírito Santo', sigla: 'ES' },
+    { nome: 'Goiás', sigla: 'GO' },
+    { nome: 'Maranhão', sigla: 'MA' },
+    { nome: 'Mato Grosso', sigla: 'MT' },
+    { nome: 'Mato Grosso do Sul', sigla: 'MS' },
+    { nome: 'Minas Gerais', sigla: 'MG' },
+    { nome: 'Pará', sigla: 'PA' },
+    { nome: 'Paraíba', sigla: 'PB' },
+    { nome: 'Paraná', sigla: 'PR' },
+    { nome: 'Pernambuco', sigla: 'PE' },
+    { nome: 'Piauí', sigla: 'PI' },
+    { nome: 'Rio de Janeiro', sigla: 'RJ' },
+    { nome: 'Rio Grande do Norte', sigla: 'RN' },
+    { nome: 'Rio Grande do Sul', sigla: 'RS' },
+    { nome: 'Rondônia', sigla: 'RO' },
+    { nome: 'Roraima', sigla: 'RR' },
+    { nome: 'Santa Catarina', sigla: 'SC' },
+    { nome: 'São Paulo', sigla: 'SP' },
+    { nome: 'Sergipe', sigla: 'SE' },
+    { nome: 'Tocantins', sigla: 'TO' },
+];
 
 export const AdicionarAnimais = () => {
     const navigate = useNavigate();
@@ -26,24 +56,55 @@ export const AdicionarAnimais = () => {
         animalPicture: "",
         race: "",
         weight: "",
-        location: "",
+        state: "",
+        city: "",
         description: "",
     });
+
+    const [Cities, setCities] = useState<string[]>([]);
+    const [loadingCities, setLoadingCities] = useState(false);
 
     function handlePetInputChange(e: React.ChangeEvent<HTMLInputElement>) {
         const { id, value } = e.target;
         setPetFormData((prev) => ({
             ...prev,
             [id]: value,
+            ...(id === "state" ? { city: '' } : {}),
         }));
     }
+
+    useEffect(() => {
+        async function fetchCities() {
+            if (!petFormData.state) {
+                setCities([]);
+                return;
+            }
+
+            const stateSelected = States.find(s => s.sigla === petFormData.state);
+            if (!stateSelected) return;
+
+            setLoadingCities(true);
+            try {
+                const res = await fetch(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${stateSelected.sigla}/municipios`);
+                const data = await res.json();
+                setCities(data.map((city: any) => city.nome));
+            }catch (error) {
+                console.error("Erro ao buscar cidades:", error);
+                setCities([]);
+            }finally {
+                setLoadingCities(false);
+            }
+        }
+
+        fetchCities();
+    }, [petFormData.state]);
 
     async function handlePetSubmit(event: React.FormEvent) {
         event.preventDefault();
 
         const formData = new FormData();
 
-        formData.append("idUser", petFormData.idUser); // Assuming a default user ID for now
+        formData.append("idUser", petFormData.idUser);
         formData.append("name", petFormData.name);
         formData.append("age", petFormData.age);
         formData.append("gender", petFormData.gender);
@@ -51,7 +112,8 @@ export const AdicionarAnimais = () => {
         formData.append("kind", petFormData.kind);
         formData.append("race", petFormData.race);
         formData.append("weight", petFormData.weight);
-        formData.append("location", petFormData.location);
+        formData.append("state", petFormData.state);
+        formData.append("city", petFormData.city);
         formData.append("description", petFormData.description);
 
         const animalPictureFile = document.getElementById("animalPicture") as HTMLInputElement;
@@ -70,14 +132,6 @@ export const AdicionarAnimais = () => {
         } catch (error) {
             console.error("Erro ao cadastrar novo animal", error);
         }
-
-        // try {
-        //     const response = await api.post("/animal", petFormData);
-        //     console.log(response.data);
-        //     navigate("/");
-        // } catch (error) {
-        //     console.error("Erro ao cadastrar novo animal", error);
-        // }
     }
 
     return (
@@ -139,10 +193,14 @@ export const AdicionarAnimais = () => {
                                 className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" />
                         </div>
                         <div>
-                            <label className="block text-gray-700 mb-2" htmlFor="location">Local *</label>
-                            <input type="text" id="location" value={petFormData.location} onChange={handlePetInputChange}
-                                placeholder="Cidade, Estado"
-                                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+                            <label className="block text-gray-700 mb-2" htmlFor="state">Estado *</label>
+                            <select id="state" value={petFormData.state} onChange={handlePetInputChange} 
+                                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400">
+                                    <option value="">Selecione um estado</option>
+                                    {States.map(est => (
+                                        <option key={est.sigla} value={est.nome}>{est.nome}</option>
+                                ))}
+                                </select>
                         </div>
                         <div>
                             <label className="block text-gray-700 mb-2" htmlFor="idUser">Id do Usuario *</label>
@@ -151,15 +209,27 @@ export const AdicionarAnimais = () => {
                                 className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" />
                         </div>
                         <div>
-                            <label className="block text-gray-700 mb-2" htmlFor="animalPicture">Link da Imagem *</label>
-                            <input type="file" id="animalPicture" value={petFormData.animalPicture} onChange={handlePetInputChange}
-                                placeholder="Link da imagem do animal em conversão picture64"
-                                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+                            <label className="block text-gray-700 mb-2" htmlFor="city">Cidade *</label>
+                            <select id="city" value={petFormData.city} onChange={handlePetInputChange} disabled={!petFormData.state || loadingCities}
+                                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400">
+                                    <option value="">
+                                        {loadingCities ? "Carregando cidades..." : "Selecione uma cidade"}
+                                    </option>
+                                    {Cities.map(city => (
+                                        <option key={city} value={city}>{city}</option>
+                                    ))}
+                            </select>
                         </div>
-                        <div className="md:col-span-2">
+                        <div>
                             <label className="block text-gray-700 mb-2" htmlFor="description">Sobre o Pet *</label>
                             <input type="text" id="description" value={petFormData.description} onChange={handlePetInputChange}
                                 placeholder="Dócil, brincalhão, gosta de passear..."
+                                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+                        </div>
+                        <div>
+                            <label className="block text-gray-700 mb-2" htmlFor="animalPicture">Link da Imagem *</label>
+                            <input type="file" id="animalPicture" value={petFormData.animalPicture} onChange={handlePetInputChange}
+                                placeholder="Link da imagem do animal em conversão picture64"
                                 className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" />
                         </div>
                         

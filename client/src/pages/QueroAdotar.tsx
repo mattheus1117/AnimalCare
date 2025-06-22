@@ -40,7 +40,7 @@ export const QueroAdotar = () => {
     const [userCity, setUserCity] = React.useState("");
     const [userState, setUserState] = React.useState("");
 
-    const { getWithProactiveAuth, role, isAuthenticated } = useAuth();
+    const { role, isAuthenticated } = useAuth();
 
     useEffect(() => {
         loadAnimals();
