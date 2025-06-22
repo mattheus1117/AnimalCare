@@ -191,9 +191,13 @@ export const AdicionarAnimais = () => {
                         </div>
                         <div>
                             <label className="block text-gray-700 mb-2" htmlFor="size">Porte *</label>
-                            <input type="text" id="size" value={petFormData.size} onChange={handlePetInputChange}
-                                placeholder="Ex: 2 (1=Pequeno, 2=Médio, 3=Grande)"
-                                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+                            <select id="size" value={petFormData.size} onChange={handlePetInputChange}
+                                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400">
+                                    <option value="" disabled>Selecione o porte</option>
+                                    <option value="1">Pequeno</option>
+                                    <option value="2">Médio</option>
+                                    <option value="3">Grande</option>
+                                </select>
                         </div>
                         <div>
                             <label className="block text-gray-700 mb-2" htmlFor="state">Estado *</label>

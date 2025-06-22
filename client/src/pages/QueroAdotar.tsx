@@ -40,7 +40,7 @@ export const QueroAdotar = () => {
     const [userCity, setUserCity] = React.useState("");
     const [userState, setUserState] = React.useState("");
 
-    const { role, isAuthenticated } = useAuth();
+    const { role, isAuthenticated, loading } = useAuth();
 
     useEffect(() => {
         loadAnimals();
@@ -94,7 +94,7 @@ export const QueroAdotar = () => {
                 <h2>Uma seleção de pets que buscam um lar para chamar de seu.</h2>
             </div>
 
-            {isAuthenticated && role === 'ong' && (
+            {!loading && isAuthenticated && role === 'ong' && (
                 <Link to="/AdicionarAnimais" className="fixed-button"
                 >+ Adicionar Animal</Link>
             )}

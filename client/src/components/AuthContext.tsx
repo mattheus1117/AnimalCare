@@ -34,6 +34,7 @@ interface AuthContextType {
   logout: () => void;
   user: Usuario | null;
   role: string | null;
+  loading: boolean;
   getWithProactiveAuth: <T = any>(
     url: string,
     config?: AxiosRequestConfig
@@ -46,6 +47,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [user, setUser] = useState<Usuario | null>(null);
   const [role, setRole] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -71,6 +73,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         logout();
       });
     }
+    setLoading(false);
   }, []);
 
   const login = async (accessToken: string) => {
@@ -156,7 +159,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   }
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, login, logout, user, role, getWithProactiveAuth }}>
+    <AuthContext.Provider value={{ isAuthenticated, login, logout, user, role, getWithProactiveAuth, loading }}>
       {children}
     </AuthContext.Provider>
   );
