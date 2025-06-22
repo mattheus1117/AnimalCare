@@ -22,7 +22,8 @@ interface TokenPayload {
 
 interface Usuario {
   name: string;
-  cpf: string;
+  cpf?: string;
+  cnpj?: string;
   email: string;
   city: string;
 }
@@ -32,6 +33,7 @@ interface AuthContextType {
   login: (token: string) => void;
   logout: () => void;
   user: Usuario | null;
+  role: string | null;
   getWithProactiveAuth: <T = any>(
     url: string,
     config?: AxiosRequestConfig
@@ -43,20 +45,42 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [user, setUser] = useState<Usuario | null>(null);
+  const [role, setRole] = useState<string | null>(null);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
+    const storedRole = localStorage.getItem('userRole');
+
     if (token) {
       setIsAuthenticated(true);
+    
+    if (storedRole) {
+      setRole(storedRole);
+    }
+
+    api.get("/me", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((response) => {
+        setUser(response.data);
+      })
+      .catch((error) => {
+        console.error("Erro ao buscar dados do usuário:", error);
+        logout();
+      });
     }
   }, []);
 
   const login = async (accessToken: string) => {
     const decoded = jwtDecode<TokenPayload>(accessToken);
+    const normalizedRole = decoded.role.toLowerCase();
     localStorage.setItem("token", accessToken);
     localStorage.setItem('accessTokenExp', String(decoded.exp));
     localStorage.setItem('userRole', decoded.role);
     setIsAuthenticated(true);
+    setRole(normalizedRole);
 
     try {
       const userResponse = await api.get("/me", {
@@ -78,6 +102,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     localStorage.removeItem("userRole");
     setIsAuthenticated(false);
     setUser(null);
+    setRole(null);
   };
 
   function isTokenExpiringSoon(token: string): boolean {
@@ -131,7 +156,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   }
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, login, logout, user, getWithProactiveAuth }}>
+    <AuthContext.Provider value={{ isAuthenticated, login, logout, user, role, getWithProactiveAuth }}>
       {children}
     </AuthContext.Provider>
   );

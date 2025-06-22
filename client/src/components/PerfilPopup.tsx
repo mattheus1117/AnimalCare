@@ -3,14 +3,14 @@ import { useAuth } from "./AuthContext";
 import "../css/PerfilPopup.css"; // Crie ou adicione estilo aqui conforme desejar
 
 export default function PerfilPopup({ onClose }: { onClose: () => void }) {
-  const { user, logout } = useAuth();
+  const { user, role, logout } = useAuth();
 
   return (
     <div className="perfil-popup-overlay">
       <div className="perfil-popup">
         <h2>Perfil</h2>
         <p><strong>Nome:</strong> {user?.name}</p>
-        <p><strong>CPF:</strong> {user?.cpf}</p>
+        <p><strong>{role === 'ong' ? "CNPJ:" : "CPF:"}</strong> {role === 'ong' ? user?.cnpj : user?.cpf}</p>
         <p><strong>Email:</strong> {user?.email}</p>
         <p><strong>Cidade:</strong> {user?.city}</p>
 

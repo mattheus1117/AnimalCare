@@ -175,7 +175,7 @@ export const AdicionarAnimais = () => {
                     <div className="flex justify-center mt-4">
                         <button
                             type="button"
-                            onClick={() => navigate("/home")}
+                            onClick={() => navigate("/adotar")}
                             className="text-sm text-indigo-500 hover:underline cursor-pointer"
                         >
                             Voltar

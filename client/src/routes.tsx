@@ -19,7 +19,6 @@ import { AdicionarAnimais } from "./pages/AdicionarAnimais";
 import { Sobre } from './pages/Sobre';
 import { Contato } from './pages/Contato';
 import { TermosDeUso } from './pages/TermosDeUso';
-import PerfilPopup from './components/PerfilPopup';
 
 export const AppRoutes = () => {
     return (

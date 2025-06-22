@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -35,7 +36,7 @@ export const QueroAdotar = () => {
 
     const [animals, setAnimals] = React.useState<Animal[]>([]);
 
-    const { getWithProactiveAuth } = useAuth();
+    const { getWithProactiveAuth, role, isAuthenticated } = useAuth();
 
     useEffect(() => {
         loadAnimals();
@@ -64,6 +65,11 @@ export const QueroAdotar = () => {
             ))}
 
         </div>
+        {isAuthenticated && role === 'ong' && (
+            <Link to="/AdicionarAnimais" className="fixed-button"
+            >+ Adicionar Animal</Link>
+        )}
+
         <Footer />
 
         {chatVisivel && <Chat onClose={() => setChatVisivel(false)} />}
