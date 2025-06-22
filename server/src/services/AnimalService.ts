@@ -33,7 +33,31 @@ class AnimalService {
         return animals;
     };
 
-    async createAnimal(idUser: string, animalPicture: any, name: string, age: number, gender: string, size: number, kind: string, race: string, status: string, weight: number, location: string, description: string) {
+    async listAnimalsByLocation(state: string, city: string) {
+        const animalsInSameCity = await prismaClient.animal.findMany({
+            where: {
+                state: state,
+                city: city
+            }
+        });
+
+        const animalsInOtherCities = await prismaClient.animal.findMany({
+            where: {
+                state: state,
+                city: {
+                    not: city
+                }
+            }
+        });
+
+        return {
+            animalsInSameCity,
+            animalsInOtherCities
+        };
+    }
+
+
+    async createAnimal(idUser: string, animalPicture: any, name: string, age: number, gender: string, size: number, kind: string, race: string, status: string, weight: number, state: string, city: string, description: string) {
         
         const fileBuffer = await animalPicture.toBuffer();
         const fileExtension = animalPicture.filename.split('.').pop();
@@ -84,7 +108,8 @@ class AnimalService {
                 race,
                 status: "PD",
                 weight,
-                location,
+                state,
+                city,
                 description
             }
         });

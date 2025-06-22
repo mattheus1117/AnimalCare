@@ -9,9 +9,10 @@ interface Animal {
     size: number;
     kind: string;
     race: string;
+    state: string;
+    city: string;
     status: string;
     weight?: number;
-    location?: string;
     description?: string;
 }
 
@@ -27,7 +28,7 @@ export default function Card({ animal, onClick }: CardProps) {
                 <img src={animal.imageUrl} alt={animal.name} className="QAdotar-img" />
                 <div className="QAdotar-info">
                     <h3>{animal.name}</h3>
-                    <p>{animal.location}</p>
+                    <p>{animal.city}, {animal.state}</p>
                     <button className="QAdotar-button">Quero Adotar</button>
                 </div>
             </div>

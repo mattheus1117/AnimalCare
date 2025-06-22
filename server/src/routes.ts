@@ -46,6 +46,10 @@ export async function routes(fastify: FastifyInstance, options: FastifyPluginOpt
         return new AnimalController().handleListAnimals(request, reply);
     });
 
+    fastify.get("/animalsByLocation", async (request: FastifyRequest, reply: FastifyReply) => {
+        return new AnimalController().handleListAnimalsByLocation(request, reply);
+    });
+
     fastify.post("/animal", async (request: FastifyRequest, reply: FastifyReply) => {
         return new AnimalController().handleCreateAnimal(request, reply);
     });
