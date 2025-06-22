@@ -13,7 +13,7 @@ export default function ChatPopup({ onClose }: { onClose: () => void }) {
   };
 
   return (
-    <div className="chat-popup">
+    <div className="chat-popup">      
       <div className="chat-header">
         <h3>Chat</h3>
         <button className="close-btn" onClick={onClose}>&times;</button>

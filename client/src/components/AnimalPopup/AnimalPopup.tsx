@@ -8,9 +8,10 @@ interface Animal {
     size: number;
     kind: string;
     race: string;
+    state: string;
+    city: string;
     status: string;
     weight?: number;
-    location?: string;
     description?: string;
 }
 
@@ -36,7 +37,8 @@ export default function AnimalPopup({ animal, onClose }: AnimalPopupProps) {
             <div><strong>Idade</strong><br />{animal.age}</div>
             <div><strong>Raça</strong><br />{animal.race}</div>
             <div><strong>Porte</strong><br />{animal.size}</div>
-            <div><strong>Local</strong><br />{animal.location}</div>
+            <div><strong>Cidade</strong><br />{animal.city}</div>
+            <div><strong>Estado</strong><br />{animal.state}</div>
             <div style={{ gridColumn: '1 / -1' }}>
               <strong>Sobre o pet</strong><br />{animal.description}
             </div>

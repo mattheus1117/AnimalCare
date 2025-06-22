@@ -45,6 +45,8 @@ model Animal {
     kind String
     race String
     status String
+    state String
+    city String
     weight Int?
     location String?
     description String?
