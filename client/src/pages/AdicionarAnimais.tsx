@@ -176,9 +176,12 @@ export const AdicionarAnimais = () => {
                         </div>
                         <div>
                             <label className="block text-gray-700 mb-2" htmlFor="gender">Sexo *</label>
-                            <input type="text" id="gender" value={petFormData.gender} onChange={handlePetInputChange}
-                                placeholder="Sexo do animal"
-                                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+                            <select id="gender" value={petFormData.gender} onChange={handlePetInputChange}
+                                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400">
+                                <option value="" disabled>Selecione o sexo</option>
+                                <option value="M">Macho</option>
+                                <option value="F">Fêmea</option>
+                            </select>
                         </div>
                         <div>
                             <label className="block text-gray-700 mb-2" htmlFor="weight">Peso *</label>
@@ -196,7 +199,7 @@ export const AdicionarAnimais = () => {
                             <label className="block text-gray-700 mb-2" htmlFor="state">Estado *</label>
                             <select id="state" value={petFormData.state} onChange={handlePetInputChange} 
                                 className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400">
-                                    <option value="">Selecione um estado</option>
+                                    <option value="" disabled>Selecione um estado</option>
                                     {States.map(est => (
                                         <option key={est.sigla} value={est.nome}>{est.nome}</option>
                                 ))}
