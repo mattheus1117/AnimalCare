@@ -66,6 +66,7 @@ export const AdicionarAnimais = () => {
                 },
             });
             console.log(response.data);
+            navigate("/adotar")
         } catch (error) {
             console.error("Erro ao cadastrar novo animal", error);
         }
@@ -110,7 +111,7 @@ export const AdicionarAnimais = () => {
                         <div>
                             <label className="block text-gray-700 mb-2" htmlFor="age">Idade *</label>
                             <input type="text" id="age" value={petFormData.age} onChange={handlePetInputChange}
-                                placeholder="Ex: 2 anos"
+                                placeholder="Ex: 2"
                                 className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" />
                         </div>
                         <div>
@@ -128,13 +129,13 @@ export const AdicionarAnimais = () => {
                         <div>
                             <label className="block text-gray-700 mb-2" htmlFor="weight">Peso *</label>
                             <input type="text" id="weight" value={petFormData.weight} onChange={handlePetInputChange}
-                                placeholder="Peso do animal"
+                                placeholder="Ex: 3"
                                 className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" />
                         </div>
                         <div>
                             <label className="block text-gray-700 mb-2" htmlFor="size">Porte *</label>
                             <input type="text" id="size" value={petFormData.size} onChange={handlePetInputChange}
-                                placeholder="Ex: Pequeno, Médio, Grande"
+                                placeholder="Ex: 2 (1=Pequeno, 2=Médio, 3=Grande)"
                                 className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" />
                         </div>
                         <div>

@@ -20,7 +20,7 @@ class AnimalController {
             size,
             kind,
             race,
-            status,
+            status = "disponível",
             weight,
             location,
             description,
