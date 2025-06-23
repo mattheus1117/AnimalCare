@@ -235,10 +235,14 @@ export const AdicionarAnimais = () => {
                                 </select>
                         </div>
                         <div>
-                            <label className="block text-gray-700 mb-2" htmlFor="idUser">Id do Usuario <span className="text-red-500">*</span></label>
-                            <input type="text" id="idUser" value={petFormData.idUser} onChange={handlePetInputChange}
-                                placeholder="Id do usuário que está cadastrando o animal"
-                                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+                            <label className="block text-gray-700 mb-2" htmlFor="idUser">Usuario de Cadastro <span className="text-red-500">*</span></label>
+                            <select id="idUser" value={petFormData.idUser} onChange={handlePetSelectChange}
+                                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400">
+                                    <option value="" disabled>Selecione o Usuário</option>
+                                    <option value="68571fc6e25a5d59755d3d5c">Douglas</option>
+                                    <option value="6850ad402fb6173f647ab3ad">Edson</option>
+                                    <option value="6840ac17c96ef7a9fbb0e0d7">Moura</option>
+                                </select>
                         </div>
                         <div>
                             <label className="block text-gray-700 mb-2" htmlFor="city">Cidade <span className="text-red-500">*</span></label>
