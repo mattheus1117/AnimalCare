@@ -73,30 +73,52 @@ export const AdicionarAnimais = () => {
         }));
     }
 
-    useEffect(() => {
-        async function fetchCities() {
-            if (!petFormData.state) {
-                setCities([]);
-                return;
-            }
+    function handlePetSelectChange(e: React.ChangeEvent<HTMLSelectElement>) {
+        const { id, value } = e.target;
+        setPetFormData((prev) => ({
+            ...prev,
+            [id]: value,
+            ...(id === "state" ? { city: '' } : {}),
+        }));
+    }
 
-            const stateSelected = States.find(s => s.sigla === petFormData.state);
-            if (!stateSelected) return;
+    function handlePetStateChange(e: React.ChangeEvent<HTMLSelectElement>) {
+        const { id, value } = e.target;
 
-            setLoadingCities(true);
-            try {
-                const res = await fetch(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${stateSelected.sigla}/municipios`);
-                const data = await res.json();
-                setCities(data.map((city: any) => city.nome));
-            }catch (error) {
-                console.error("Erro ao buscar cidades:", error);
-                setCities([]);
-            }finally {
-                setLoadingCities(false);
-            }
+        setPetFormData((prev) => ({
+            ...prev,
+            [id]: value,
+            ...(id === "state" ? { city: '' } : {}),
+        }));
+
+        // Passa o valor diretamente
+        fetchCities(value);
+    }
+
+    async function fetchCities(state: string) {
+        if (!state) {
+            setCities([]);
+            return;
         }
 
-        fetchCities();
+        const stateSelected = States.find(s => s.nome === state);
+        if (!stateSelected) return;
+
+        setLoadingCities(true);
+        try {
+            const res = await fetch(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${stateSelected.sigla}/municipios`);
+            const data = await res.json();
+            setCities(data.map((city: any) => city.nome));
+        } catch (error) {
+            console.error("Erro ao buscar cidades:", error);
+            setCities([]);
+        } finally {
+            setLoadingCities(false);
+        }
+    }
+
+    useEffect(() => {
+
     }, [petFormData.state]);
 
     async function handlePetSubmit(event: React.FormEvent) {
@@ -151,32 +173,34 @@ export const AdicionarAnimais = () => {
                    <div className="box">
                     <form onSubmit={handlePetSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <label className="block text-gray-700 mb-2" htmlFor="name">Nome do animal *</label>
+                            <label className="block text-gray-700 mb-2" htmlFor="name">Nome do animal <span className="text-red-500">*</span></label>
                             <input type="text" id="name" value={petFormData.name} onChange={handlePetInputChange}
                                 placeholder="Nome"
                                 className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" />
                         </div>
                         <div>
-                            <label className="block text-gray-700 mb-2" htmlFor="kind">Espécie *</label>
+                            <label className="block text-gray-700 mb-2" htmlFor="kind">Espécie <span className="text-red-500">*</span></label>
                             <input type="text" id="kind" value={petFormData.kind} onChange={handlePetInputChange}
                                 placeholder="Ex: Cachorro, Gato, Pássaro"
                                 className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" />
                         </div>
                         <div>
-                            <label className="block text-gray-700 mb-2" htmlFor="age">Idade *</label>
+                            <label className="block text-gray-700 mb-2" htmlFor="age">Idade <span className="text-red-500">*</span></label>
                             <input type="text" id="age" value={petFormData.age} onChange={handlePetInputChange}
                                 placeholder="Ex: 2"
-                                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+                                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" 
+                                maxLength={3}
+                                />
                         </div>
                         <div>
-                            <label className="block text-gray-700 mb-2" htmlFor="race">Raça *</label>
+                            <label className="block text-gray-700 mb-2" htmlFor="race">Raça <span className="text-red-500">*</span></label>
                             <input type="text" id="race" value={petFormData.race} onChange={handlePetInputChange}
                                 placeholder="Raça do animal"
                                 className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" />
                         </div>
                         <div>
-                            <label className="block text-gray-700 mb-2" htmlFor="gender">Sexo *</label>
-                            <select id="gender" value={petFormData.gender} onChange={handlePetInputChange}
+                            <label className="block text-gray-700 mb-2" htmlFor="gender">Sexo <span className="text-red-500">*</span></label>
+                            <select id="gender" value={petFormData.gender} onChange={handlePetSelectChange}
                                 className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400">
                                 <option value="" disabled>Selecione o sexo</option>
                                 <option value="M">Macho</option>
@@ -184,14 +208,15 @@ export const AdicionarAnimais = () => {
                             </select>
                         </div>
                         <div>
-                            <label className="block text-gray-700 mb-2" htmlFor="weight">Peso *</label>
+                            <label className="block text-gray-700 mb-2" htmlFor="weight">Peso <span className="text-red-500">*</span></label>
                             <input type="text" id="weight" value={petFormData.weight} onChange={handlePetInputChange}
                                 placeholder="Ex: 3"
-                                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+                                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" 
+                                maxLength={2}/>
                         </div>
                         <div>
-                            <label className="block text-gray-700 mb-2" htmlFor="size">Porte *</label>
-                            <select id="size" value={petFormData.size} onChange={handlePetInputChange}
+                            <label className="block text-gray-700 mb-2" htmlFor="size">Porte <span className="text-red-500">*</span></label>
+                            <select id="size" value={petFormData.size} onChange={handlePetSelectChange}
                                 className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400">
                                     <option value="" disabled>Selecione o porte</option>
                                     <option value="1">Pequeno</option>
@@ -200,8 +225,8 @@ export const AdicionarAnimais = () => {
                                 </select>
                         </div>
                         <div>
-                            <label className="block text-gray-700 mb-2" htmlFor="state">Estado *</label>
-                            <select id="state" value={petFormData.state} onChange={handlePetInputChange} 
+                            <label className="block text-gray-700 mb-2" htmlFor="state">Estado <span className="text-red-500">*</span></label>
+                            <select id="state" value={petFormData.state} onChange={handlePetStateChange} 
                                 className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400">
                                     <option value="" disabled>Selecione um estado</option>
                                     {States.map(est => (
@@ -210,15 +235,16 @@ export const AdicionarAnimais = () => {
                                 </select>
                         </div>
                         <div>
-                            <label className="block text-gray-700 mb-2" htmlFor="idUser">Id do Usuario *</label>
+                            <label className="block text-gray-700 mb-2" htmlFor="idUser">Id do Usuario <span className="text-red-500">*</span></label>
                             <input type="text" id="idUser" value={petFormData.idUser} onChange={handlePetInputChange}
                                 placeholder="Id do usuário que está cadastrando o animal"
                                 className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" />
                         </div>
                         <div>
-                            <label className="block text-gray-700 mb-2" htmlFor="city">Cidade *</label>
-                            <select id="city" value={petFormData.city} onChange={handlePetInputChange} disabled={!petFormData.state || loadingCities}
-                                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400">
+                            <label className="block text-gray-700 mb-2" htmlFor="city">Cidade <span className="text-red-500">*</span></label>
+                            <select id="city" value={petFormData.city} onChange={handlePetSelectChange} disabled={!petFormData.state || loadingCities}
+                                  className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400
+                                    ${(!petFormData.state || loadingCities) ? 'bg-gray-100 text-gray-500 cursor-not-allowed' : ''}`}>
                                     <option value="">
                                         {loadingCities ? "Carregando cidades..." : "Selecione uma cidade"}
                                     </option>
@@ -228,13 +254,13 @@ export const AdicionarAnimais = () => {
                             </select>
                         </div>
                         <div>
-                            <label className="block text-gray-700 mb-2" htmlFor="description">Sobre o Pet *</label>
+                            <label className="block text-gray-700 mb-2" htmlFor="description">Sobre o Pet <span className="text-red-500">*</span></label>
                             <input type="text" id="description" value={petFormData.description} onChange={handlePetInputChange}
                                 placeholder="Dócil, brincalhão, gosta de passear..."
                                 className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" />
                         </div>
                         <div>
-                            <label className="block text-gray-700 mb-2" htmlFor="animalPicture">Link da Imagem *</label>
+                            <label className="block text-gray-700 mb-2" htmlFor="animalPicture">Link da Imagem <span className="text-red-500">*</span></label>
                             <input type="file" id="animalPicture" value={petFormData.animalPicture} onChange={handlePetInputChange}
                                 placeholder="Link da imagem do animal em conversão picture64"
                                 className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" />
