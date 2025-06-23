@@ -67,3 +67,57 @@
 .createAccount-box button:hover {
   background-color: #eab308;
 }
+
+.accountType-box {
+  background-color: #d1d5db;
+  padding: 2rem;
+  margin: 1rem;
+  border-radius: 1rem;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 28rem;
+}
+
+.accountType-box h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #1f2937;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.account-btn {
+  width: 100%;
+  background-color: white;
+  color: #1f2937;
+  padding: 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 9999px;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.account-btn:hover {
+  background-color: #f3f4f6;
+}
+
+.backToLogin {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.back-btn {
+  background: none;
+  border: none;
+  color: #eab308;
+  font-size: 0.875rem;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0;
+}
+
+.back-btn:hover {
+  text-decoration: none;
+}

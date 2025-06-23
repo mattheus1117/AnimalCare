@@ -111,29 +111,29 @@ export const CreateAccount = () => {
                 </div>
 
                 {!showOngForm && !showTutorForm ? (
-                    <div className="bg-gray-300 p-8 m-4 rounded-2xl shadow-lg w-full max-w-md">
+                    <div className="accountType-box">
                         <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">
                             Escolha o tipo de conta
                         </h2>
                         <button
                             type="button"
                             onClick={handleTutorClick}
-                            className="w-full bg-white text-gray-800 py-3 rounded-full border border-gray-300 mb-4 hover:bg-gray-100 transition-colors cursor-pointer"
+                            className="account-btn"
                         >
                             Criar conta Tutor
                         </button>
                         <button
                             type="button"
                             onClick={handleOngClick}
-                            className="w-full bg-white text-gray-800 py-3 rounded-full border border-gray-300 mb-4 hover:bg-gray-100 transition-colors cursor-pointer"
+                            className="account-btn"
                         >
                             Criar conta ONG
                         </button>
-                        <div className="flex justify-center mt-4">
+                        <div className="backToLogin">
                             <button
                                 type="button"
-                                onClick={() => navigate("/")}
-                                className="text-sm text-yellow-500 hover:underline cursor-pointer"
+                                onClick={() => navigate("/login")}
+                                className="back-btn"
                             >
                                 Voltar para login
                             </button>
