@@ -180,9 +180,14 @@ export const AdicionarAnimais = () => {
                         </div>
                         <div>
                             <label className="block text-gray-700 mb-2" htmlFor="kind">Espécie <span className="text-red-500">*</span></label>
-                            <input type="text" id="kind" value={petFormData.kind} onChange={handlePetInputChange}
-                                placeholder="Ex: Cachorro, Gato, Pássaro"
-                                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+                            <select id="kind" value={petFormData.kind} onChange={handlePetSelectChange}
+                                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400">
+                                <option value="" disabled>Selecione a Espécie</option>
+                                <option value="Cachorro">Cachorro</option>
+                                <option value="Gato">Gato</option>
+                                <option value="Pássaro">Pássaro</option>
+                                <option value="Outros">Outros</option>
+                            </select>
                         </div>
                         <div>
                             <label className="block text-gray-700 mb-2" htmlFor="age">Idade <span className="text-red-500">*</span></label>

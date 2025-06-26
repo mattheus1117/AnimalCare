@@ -47,17 +47,69 @@ export const CreateAccount = () => {
 
     function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
         const { id, value } = e.target;
+        let newValue = value;
+
+        if (id === "cnpj") newValue = formatCNPJ(value);
+        if (id === "zipcode") newValue = formatZipCode(value);
+        if (id === "contact") newValue = formatTelephone(value);
+
         setOngFormData((prev) => ({
             ...prev,
-            [id]: value,
+            [id]: newValue,
         }));
+    }
+
+    function formatCNPJ(value: string) {
+        value = value.replace(/\D/g, ""); // Remove tudo que não for número
+        return value
+            .replace(/^(\d{2})(\d)/, "$1.$2")
+            .replace(/^(\d{2})\.(\d{3})(\d)/, "$1.$2.$3")
+            .replace(/\.(\d{3})(\d)/, ".$1/$2")
+            .replace(/(\d{4})(\d)/, "$1-$2")
+            .slice(0, 18);
+    }
+
+    function formatCPF(value: string) {
+        value = value.replace(/\D/g, "");
+        return value
+            .replace(/(\d{3})(\d)/, "$1.$2")
+            .replace(/(\d{3})(\d)/, "$1.$2")
+            .replace(/(\d{3})(\d{1,2})$/, "$1-$2")
+            .slice(0, 14);
+    }
+
+    function formatZipCode(value: string) {
+        value = value.replace(/\D/g, "");
+        return value.replace(/^(\d{5})(\d{1,3})$/, "$1-$2").slice(0, 9);
+    }
+
+    function formatTelephone(value: string) {
+        value = value.replace(/\D/g, "");
+        return value
+            .replace(/^(\d{2})(\d)/, "($1) $2")
+            .replace(/(\d{5})(\d)/, "$1-$2")
+            .slice(0, 15);
+    }
+
+    function formatDate(value: string) {
+        value = value.replace(/\D/g, "");
+        if (value.length <= 2) return value;
+        if (value.length <= 4) return value.replace(/(\d{2})(\d{1,2})/, "$1/$2");
+        return value.replace(/(\d{2})(\d{2})(\d{1,4})/, "$1/$2/$3").slice(0,10);
     }
 
     function handleTutorInputChange(e: React.ChangeEvent<HTMLInputElement>) {
         const { id, value } = e.target;
+        let newValue = value;
+
+        if (id === "cpf") newValue = formatCPF(value);
+        if (id === "zipcode") newValue = formatZipCode(value);
+        if (id === "telephone") newValue = formatTelephone(value);
+        if (id === "dateOfBirth") newValue = formatDate(value);
+
         setTutorFormData((prev) => ({
             ...prev,
-            [id]: value,
+            [id]: newValue,
         }));
     }
 
@@ -159,18 +211,27 @@ export const CreateAccount = () => {
                                 <label className="block text-gray-700 mb-2" htmlFor="cpf">CPF *</label>
                                 <input type="text" id="cpf" value={tutorFormData.cpf} onChange={handleTutorInputChange}
                                     placeholder="000.000.000-00"
+                                    pattern="^\d{3}\.\d{3}\.\d{3}-\d{2}$"
+                                    title="Digite um CPF válido"
+                                    required
                                     className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400" />
                             </div>
                             <div>
                                 <label className="block text-gray-700 mb-2" htmlFor="zipcode">CEP *</label>
                                 <input type="text" id="zipcode" value={tutorFormData.zipcode} onChange={handleTutorInputChange}
                                     placeholder="00000-000"
+                                    pattern="^\d{5}-\d{3}$"
+                                    title="Digite CEP corretamente"
+                                    required
                                     className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400" />
                             </div>
                             <div>
                                 <label className="block text-gray-700 mb-2" htmlFor="dateOfBirth">Data de nascimento *</label>
                                 <input type="text" id="dateOfBirth" value={tutorFormData.dateOfBirth} onChange={handleTutorInputChange}
                                     placeholder="00/00/0000"
+                                    pattern="^\d{2}/\d{2}/\d{4}$"
+                                    title="Digite uma data de nascimento válida (DD/MM/AAAA)"
+                                    required
                                     className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400" />
                             </div>
                             <div>
@@ -183,6 +244,9 @@ export const CreateAccount = () => {
                                 <label className="block text-gray-700 mb-2" htmlFor="telephone">Telefone *</label>
                                 <input type="text" id="telephone" value={tutorFormData.telephone} onChange={handleTutorInputChange}
                                     placeholder="(00) 00000-0000"
+                                    pattern="^\(\d{2}\) \d{5}-\d{4}$"
+                                    title="Digite o número de telefone valido"
+                                    required
                                     className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400" />
                             </div>
                             <div>
@@ -194,14 +258,22 @@ export const CreateAccount = () => {
                             <div className="md:col-span-2">
                                 <label className="block text-gray-700 mb-2" htmlFor="email">E-mail *</label>
                                 <input type="email" id="email" value={tutorFormData.email} onChange={handleTutorInputChange}
-                                    placeholder="exemplo@exemplo.com"
+                                    placeholder="exemplo@gmail.com"
+                                    pattern="^[a-zA-Z0-9._%+-]+@gmail\.com$"
+                                    title="O e-mail deve terminar com @gmail.com"
+                                    required
                                     className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400" />
                             </div>
                             <div className="md:col-span-2">
                                 <label className="block text-gray-700 mb-2" htmlFor="password">Senha *</label>
                                 <input type="password" id="password" value={tutorFormData.password} onChange={handleTutorInputChange}
                                     placeholder="********"
+                                    title="A senha deve conter uma letra maiúscula, uma minúscula, um número e um caractere especial."
+                                    required
                                     className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400" />
+                                    <small className="text-gray-500">
+                                        A senha deve conter uma letra maiúscula, uma minúscula, um número e um caractere especial.
+                                    </small>
                             </div>
                             <div className="md:col-span-2">
                                 <label className="block text-gray-700 mb-2" htmlFor="patio">Logradouro *</label>
@@ -243,12 +315,18 @@ export const CreateAccount = () => {
                                 <label className="block text-gray-700 mb-2" htmlFor="cnpj">CNPJ *</label>
                                 <input type="text" id="cnpj" value={ongFormData.cnpj} onChange={handleInputChange}
                                     placeholder="00.000.000/0000-00"
+                                    pattern="^\d{2}\.\d{3}\.\d{3}/\d{4}-\d{2}$"
+                                    title="Digite o CNPJ valido no formato 00.000.000/0000-00"
+                                    required
                                     className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400" />
                             </div>
                             <div>
                                 <label className="block text-gray-700 mb-2" htmlFor="zipcode">CEP *</label>
                                 <input type="text" id="zipcode" value={ongFormData.zipcode} onChange={handleInputChange}
                                     placeholder="00000-000"
+                                    pattern="^\d{5}-\d{3}$"
+                                    title="Digite CEP corretamente"
+                                    required
                                     className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400" />
                             </div>
                             <div>
@@ -267,6 +345,9 @@ export const CreateAccount = () => {
                                 <label className="block text-gray-700 mb-2" htmlFor="contact">Contato *</label>
                                 <input type="text" id="contact" value={ongFormData.contact} onChange={handleInputChange}
                                     placeholder="(00) 00000-0000"
+                                    pattern="^\(\d{2}\) \d{5}-\d{4}$"
+                                    title="Digite o número de contato valido"
+                                    required
                                     className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400" />
                             </div>
                             <div>
@@ -278,14 +359,22 @@ export const CreateAccount = () => {
                             <div className="md:col-span-2">
                                 <label className="block text-gray-700 mb-2" htmlFor="email">E-mail *</label>
                                 <input type="email" id="email" value={ongFormData.email} onChange={handleInputChange}
-                                    placeholder="exemplo@exemplo.com"
+                                    placeholder="exemplo@ong.com"
+                                    pattern="^[a-zA-Z0-9._%+-]+@ong\.com$"
+                                    title="O e-mail deve terminar com @ong.com"
+                                    required
                                     className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400" />
                             </div>
                             <div className="md:col-span-2">
                                 <label className="block text-gray-700 mb-2" htmlFor="password">Senha *</label>
                                 <input type="password" id="password" value={ongFormData.password} onChange={handleInputChange}
                                     placeholder="********"
+                                    title="A senha deve conter uma letra maiúscula, uma minúscula, um número e um caractere especial."
+                                    required
                                     className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400" />
+                                    <small className="text-gray-500">
+                                        A senha deve conter uma letra maiúscula, uma minúscula, um número e um caractere especial.
+                                    </small>
                             </div>
                             <div className="md:col-span-2">
                                 <label className="block text-gray-700 mb-2" htmlFor="patio">Logradouro *</label>
