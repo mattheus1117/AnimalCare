@@ -1,6 +1,8 @@
+import { on } from 'events';
 import './AnimalPopup.css';
 
 interface Animal {
+    id: string;
     imageUrl: string;
     name: string;
     age: number;
@@ -18,9 +20,10 @@ interface Animal {
 interface AnimalPopupProps {
     animal: Animal;
     onClose: () => void;
+    onAdotar: (animal: Animal) => void;
 }
 
-export default function AnimalPopup({ animal, onClose }: AnimalPopupProps) {
+export default function AnimalPopup({ animal, onClose, onAdotar }: AnimalPopupProps) {
   return (
     <div className="animal-popup-overlay">
       <div className="animal-popup">
@@ -44,7 +47,11 @@ export default function AnimalPopup({ animal, onClose }: AnimalPopupProps) {
             </div>
           </div>
           <div className='btn-container'>
-            <button className="btn-adotar">Quero adotar</button>
+            <button className="btn-adotar"
+              onClick={() => {
+              onAdotar(animal);
+              onClose()}}
+            >Quero adotar</button>
           </div>
         </div>
       </div>

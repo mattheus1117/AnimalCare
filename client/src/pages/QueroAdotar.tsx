@@ -15,6 +15,7 @@ import ".././css/Card.css"
 import ".././css/style.css"
 
 interface Animal {
+    id: string;
     imageUrl: string;
     name: string;
     age: number;
@@ -82,6 +83,20 @@ export const QueroAdotar = () => {
         }
     }
 
+    async function handleAdotar(animal: Animal) {
+        try {
+            // await api.delete("/animal/${animal.id}");
+            await api.delete("/animal", { params: { id: animal.id }});
+
+            setAnimalsInSameCity((prev) => prev.filter((a) => a.id !== animal.id));
+            setAnimalsInOtherCities((prev) => prev.filter((a) => a.id !== animal.id));
+
+            setAnimalSelecionado(null);
+        } catch (error) {
+            console.error("Erro ao adotar animal:", error);
+        }
+    }
+
     return (
         <>
             <Header
@@ -140,7 +155,7 @@ export const QueroAdotar = () => {
             {chatVisivel && <Chat onClose={() => setChatVisivel(false)} />}
             {doacaoVisivel && <DoacaoPopup onClose={() => setDoacaoVisivel(false)} />}
             {perfilVisivel && <PerfilPopup onClose={() => setPerfilVisivel(false)} />}
-            {animalSelecionado && (<AnimalPopup animal={animalSelecionado} onClose={() => setAnimalSelecionado(null)} />)}
+            {animalSelecionado && (<AnimalPopup animal={animalSelecionado} onClose={() => setAnimalSelecionado(null)} onAdotar={handleAdotar} />)}
         </>
     );
 }

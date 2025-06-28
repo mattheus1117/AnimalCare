@@ -259,9 +259,9 @@ export const CreateAccount = () => {
                                 <label className="block text-gray-700 mb-2" htmlFor="email">E-mail *</label>
                                 <input type="email" id="email" value={tutorFormData.email} onChange={handleTutorInputChange}
                                     placeholder="exemplo@gmail.com"
-                                    pattern="^[a-zA-Z0-9._%+-]+@gmail\.com$"
-                                    title="O e-mail deve terminar com @gmail.com"
-                                    required
+                                    // pattern="^[a-zA-Z0-9._%+-]+@gmail\.com$"
+                                    // title="O e-mail deve terminar com @gmail.com"
+                                    // required
                                     className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400" />
                             </div>
                             <div className="md:col-span-2">
@@ -360,9 +360,9 @@ export const CreateAccount = () => {
                                 <label className="block text-gray-700 mb-2" htmlFor="email">E-mail *</label>
                                 <input type="email" id="email" value={ongFormData.email} onChange={handleInputChange}
                                     placeholder="exemplo@ong.com"
-                                    pattern="^[a-zA-Z0-9._%+-]+@ong\.com$"
-                                    title="O e-mail deve terminar com @ong.com"
-                                    required
+                                    // pattern="^[a-zA-Z0-9._%+-]+@ong\.com$"
+                                    // title="O e-mail deve terminar com @ong.com"
+                                    // required
                                     className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400" />
                             </div>
                             <div className="md:col-span-2">
