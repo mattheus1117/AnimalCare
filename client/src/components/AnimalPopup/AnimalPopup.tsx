@@ -20,7 +20,7 @@ interface Animal {
 interface AnimalPopupProps {
     animal: Animal;
     onClose: () => void;
-    onAdotar: (animal: Animal) => void;
+    onAdotar: (animalId: string) => void;
 }
 
 export default function AnimalPopup({ animal, onClose, onAdotar }: AnimalPopupProps) {
@@ -49,7 +49,7 @@ export default function AnimalPopup({ animal, onClose, onAdotar }: AnimalPopupPr
           <div className='btn-container'>
             <button className="btn-adotar"
               onClick={() => {
-              onAdotar(animal);
+              onAdotar(animal.id);
               onClose()}}
             >Quero adotar</button>
           </div>

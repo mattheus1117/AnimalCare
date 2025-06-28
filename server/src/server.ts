@@ -31,6 +31,7 @@ const start = async() => {
 
     await app.register(cors, {
         origin: 'http://localhost:5173', // Front-end
+        methods: ['GET', 'POST', 'DELETE', 'PUT'], 
         credentials: true                // Para aceitar cookies no front
     });
 

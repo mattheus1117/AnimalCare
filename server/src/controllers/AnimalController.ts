@@ -78,6 +78,7 @@ class AnimalController {
     async handleDeleteAnimal(request: FastifyRequest, reply: FastifyReply){
 
         const { id } = request.query as { id: string };
+        console.log(id);
 
         const animalService = new AnimalService();
         const animal = await animalService.deleteAnimal({id});

@@ -83,13 +83,16 @@ export const QueroAdotar = () => {
         }
     }
 
-    async function handleAdotar(animal: Animal) {
+    async function handleAdotar(animalId: string) {
         try {
             // await api.delete("/animal/${animal.id}");
-            await api.delete("/animal", { params: { id: animal.id }});
+            console.log(animalId);
+            const response = await api.delete("/animal", { params: { id: animalId } });
 
-            setAnimalsInSameCity((prev) => prev.filter((a) => a.id !== animal.id));
-            setAnimalsInOtherCities((prev) => prev.filter((a) => a.id !== animal.id));
+            console.log(response);
+
+            setAnimalsInSameCity((prev) => prev.filter((a) => a.id !== animalId));
+            setAnimalsInOtherCities((prev) => prev.filter((a) => a.id !== animalId));
 
             setAnimalSelecionado(null);
         } catch (error) {
