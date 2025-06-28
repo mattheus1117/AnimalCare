@@ -54,8 +54,14 @@ export async function routes(fastify: FastifyInstance, options: FastifyPluginOpt
         return new AnimalController().handleCreateAnimal(request, reply);
     });
     
+    // PD = PARA ADOÇÃO
     fastify.put("/setPDAnimal", async (request: FastifyRequest, reply: FastifyReply) => {
         return new AnimalController().handleSetStatusPDAnimal(request, reply);
+    });
+
+    // AD = ADOTADO
+    fastify.put("/setADAnimal", async (request: FastifyRequest, reply: FastifyReply) => {
+        return new AnimalController().handleSetStatusADAnimal(request, reply);
     });
 
     fastify.delete("/animal", async (request: FastifyRequest, reply: FastifyReply) => {

@@ -67,10 +67,20 @@ class AnimalController {
     
     async handleSetStatusPDAnimal(request: FastifyRequest, reply: FastifyReply){
 
-        const { id } = request.query as { id: string };
+        const { id, idUser } = request.query as { id: string, idUser: string };
 
         const animalService = new AnimalService();
-        const animal = await animalService.setStatusPDAnimal({id});
+        const animal = await animalService.setStatusPDAnimal({id, idUser});
+
+        reply.send(animal);
+    }
+
+    async handleSetStatusADAnimal(request: FastifyRequest, reply: FastifyReply){
+
+        const { id, idUser } = request.query as { id: string, idUser: string };
+
+        const animalService = new AnimalService();
+        const animal = await animalService.setStatusADAnimal({id, idUser});
 
         reply.send(animal);
     }

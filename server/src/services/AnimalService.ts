@@ -17,8 +17,14 @@ interface CreateAnimalProps {
     description?: string;
 }
 
-interface PutAnimalProps {
+interface PutPDAnimalProps {
     id: string;
+    idUser: string;
+}
+
+interface PutADAnimalProps {
+    id: string;
+    idUser: string
 }
 
 interface DeleteAnimalProps {
@@ -36,6 +42,7 @@ class AnimalService {
     async listAnimalsByLocation(state: string, city: string) {
         const animalsInSameCity = await prismaClient.animal.findMany({
             where: {
+                status: "PD",
                 state: state,
                 city: city
             }
@@ -43,7 +50,20 @@ class AnimalService {
 
         const animalsInOtherCities = await prismaClient.animal.findMany({
             where: {
+                status: "PD",
                 state: state,
+                city: {
+                    not: city
+                }
+            }
+        });
+
+        const animalsInOtherCitiesAndStates = await prismaClient.animal.findMany({
+            where: {
+                status: "PD",
+                state:{
+                    not: state
+                },
                 city: {
                     not: city
                 }
@@ -52,7 +72,8 @@ class AnimalService {
 
         return {
             animalsInSameCity,
-            animalsInOtherCities
+            animalsInOtherCities,
+            animalsInOtherCitiesAndStates
         };
     }
 
@@ -121,9 +142,9 @@ class AnimalService {
         }
     }
 
-    async setStatusPDAnimal({ id }: PutAnimalProps) {
+    async setStatusPDAnimal({ id, idUser }: PutPDAnimalProps) {
 
-        if(!id){
+        if(!id || !idUser){
             throw new Error("Solicitação inválida.");
         }
 
@@ -142,7 +163,37 @@ class AnimalService {
                 id: findAnimal.id
             },
             data: {
+                idUser: idUser,
                 status: "PD"
+            }
+        });
+
+        return {message: `Animal ${findAnimal.name} (${findAnimal.id}) colocado para adoção com sucesso!`};
+    }
+
+    async setStatusADAnimal({ id, idUser }: PutADAnimalProps) {
+
+        if(!id || !idUser){
+            throw new Error("Solicitação inválida.");
+        }
+
+        const findAnimal = await prismaClient.animal.findFirst({
+            where:{
+                id: id
+            }
+        });
+
+        if(!findAnimal){
+            throw new Error("Animal não existe.");
+        }
+
+        await prismaClient.animal.update({
+            where:{
+                id: findAnimal.id
+            },
+            data: {
+                idUser: idUser,
+                status: "AD"
             }
         });
 
