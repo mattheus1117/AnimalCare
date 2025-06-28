@@ -24,7 +24,7 @@ export default function Navbar({ onChatClick, onDoacaoClick, onPerfilClick }: Na
                 <button onClick={onDoacaoClick} className="doacao-btn">Doação</button>
 
                 <Link to='/ongs'>
-                    ONGs/Protetores
+                    ONGs
                 </Link>
 
                 <button onClick={onChatClick} className="chat-btn">Chat</button>
@@ -35,7 +35,7 @@ export default function Navbar({ onChatClick, onDoacaoClick, onPerfilClick }: Na
                     Quero Adotar
                 </Link>
 
-                { isAuthenticated ? (
+                {isAuthenticated ? (
                     <button onClick={onPerfilClick} className="Perfil">
                         Perfil
                     </button>
