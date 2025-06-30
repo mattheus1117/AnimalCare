@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { jwtDecode } from "jwt-decode";
 
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -30,6 +31,13 @@ interface Animal {
     description?: string;
 }
 
+interface DecodedToken {
+  id: string;
+  name: string;
+  email: string;
+  // outros campos, se necessário
+}
+
 export const QueroAdotar = () => {
     const [animalSelecionado, setAnimalSelecionado] = React.useState<Animal | null>(null);
     const [chatVisivel, setChatVisivel] = React.useState(false);
@@ -38,6 +46,8 @@ export const QueroAdotar = () => {
 
     const [animalsInSameCity, setAnimalsInSameCity] = React.useState<Animal[]>([]);
     const [animalsInOtherCities, setAnimalsInOtherCities] = React.useState<Animal[]>([]);
+    const [animalsInOtherCitiesAndStates, setAnimalsInOtherCitiesAndStates] = React.useState<Animal[]>([]);
+
     const [userCity, setUserCity] = React.useState("");
     const [userState, setUserState] = React.useState("");
 
@@ -64,6 +74,7 @@ export const QueroAdotar = () => {
 
             setAnimalsInSameCity(response.data.animalsInSameCity || []);
             setAnimalsInOtherCities(response.data.animalsInOtherCities || []);
+            setAnimalsInOtherCitiesAndStates(response.data.animalsInOtherCitiesAndStates || []);
         } catch (error) {
             console.error("Erro ao buscar animais:", error);
         }
@@ -84,10 +95,15 @@ export const QueroAdotar = () => {
     }
 
     async function handleAdotar(animalId: string) {
+        const token = localStorage.getItem("token");
+        if (!token) return;
+
         try {
+            const decoded = jwtDecode<DecodedToken>(token);
+
             // await api.delete("/animal/${animal.id}");
-            console.log(animalId);
-            const response = await api.delete("/animal", { params: { id: animalId } });
+            //const response = await api.delete("/animal", { params: { id: animalId } });
+            const response = await api.put("/setADAnimal", { params: { id: animalId, idUser: decoded.id } });
 
             console.log(response);
 
@@ -142,6 +158,23 @@ export const QueroAdotar = () => {
                         </h1>
                         <div className="animal-list" style={{ display: "flex", flexWrap: "wrap", gap: "1.5rem" }}>
                             {animalsInOtherCities.map((animal, index) => (
+                                <Card
+                                    key={`state-${index}`}
+                                    animal={animal}
+                                    onClick={() => setAnimalSelecionado(animal)}
+                                />
+                            ))}
+                        </div>
+                    </div>
+                )}
+
+                {animalsInOtherCitiesAndStates.length > 0 && (
+                    <div>
+                        <h1 style={{ fontSize: "2.5rem", marginBottom: "1.5rem", marginTop: "2rem" }}>
+                            Animais disponíveis no Brasil:
+                        </h1>
+                        <div className="animal-list" style={{ display: "flex", flexWrap: "wrap", gap: "1.5rem" }}>
+                            {animalsInOtherCitiesAndStates.map((animal, index) => (
                                 <Card
                                     key={`state-${index}`}
                                     animal={animal}

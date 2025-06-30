@@ -11,8 +11,9 @@ import { Dica03 } from './pages/Dicas/Dica03';
 import { Dica04 } from './pages/Dicas/Dica04';
 import { Dica05 } from './pages/Dicas/Dica05';
 import { Dica06 } from './pages/Dicas/Dica06';
+import { Dashboard } from './pages/Dashboard';
 
-// import PrivateRoute from './components/PrivateRoute'
+import PrivateRoute from './components/PrivateRoute'
 import { AdicionarAnimais } from "./pages/AdicionarAnimais";
 
 // Footer
@@ -39,6 +40,12 @@ export const AppRoutes = () => {
                     <QueroAdotar />
                 } />
                 
+                <Route path='/dashboard' element={
+                    <PrivateRoute>
+                        <Dashboard />
+                    </PrivateRoute>
+                } />
+
                 <Route path='/login' element={<Login />} />
                 <Route path='/create-account' element={<CreateAccount />} />
 
